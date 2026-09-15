@@ -7,7 +7,9 @@ function Sidebar() {
         <div className="sidebar-wrapper">
           <div className="sidebar-header">
             <div className="sidebar-header-text">Library</div>
-            <div className="add-playlist">+</div>
+            <div className="sidebar-add-playlist">
+              <h4>+</h4>
+            </div>
           </div>
 
           <div className="sidebar-item-container">

@@ -1,7 +1,34 @@
+.sidebar-wrapper {
+  background-color: var(--bg-card-hover);
+  border-radius: var(--radius);
+  height: 100vh;
+  border-radius: var(--radius);
+}
+
 .sidebar-header {
   display: flex;
   justify-content: space-between;
   flex-direction: row;
+  padding: 10px;
+  background-color: black;
+}
+
+.sidebar-add-playlist {
+  display: flex;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid white;
+  border-radius: var(--radius);
+  cursor: pointer;
+}
+
+.sidebar-add-playlist h4 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 400;
 }
 
 .sidebar-item-container {
