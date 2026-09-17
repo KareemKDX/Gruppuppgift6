@@ -3,6 +3,7 @@ import express from "express";
 import cors from "cors";
 import { pool } from "./db";
 import authRouter from "./routes/auth";
+import { getSongs } from "./routes/song-routes";
 
 let app = express();
 
@@ -11,6 +12,7 @@ app.use(express.json());
 
 app.use("/auth", authRouter);
 
+app.get("/api/songs", getSongs);
 app.get("/test", async (req, res) => {
   const result = await pool.query("Select * from Subscriptions");
   res.json(result.rows);
