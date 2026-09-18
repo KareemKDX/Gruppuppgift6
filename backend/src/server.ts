@@ -1,6 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import pg from "pg";
+import { getSongs } from "./routes/song-routes";
 
 dotenv.config();
 
@@ -19,7 +20,7 @@ const pool = new Pool({
 });
 
 app.use(express.json());
-
+app.get("/api/songs", getSongs);
 app.get("/test", async (req, res) => {
   const result = await pool.query("Select * from Subscriptions");
   res.json(result.rows);
