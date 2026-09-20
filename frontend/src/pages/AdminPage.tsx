@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import "../css/AdminPage.css";
 
 // hur en låt ser ut när den kommer från databasen
 type Song = {
@@ -64,12 +65,12 @@ function AdminPage() {
   };
 
   return (
-    <div>
+    <div className="admin-page">
       <h1>Adminvy</h1>
 
       <h2>Lägg till låt</h2>
 
-      <form onSubmit={handleSubmit}>
+      <form className="admin-form" onSubmit={handleSubmit}>
         <input
           placeholder="Artist"
           value={artist}
@@ -105,14 +106,27 @@ function AdminPage() {
         <button type="submit">Spara låt</button>
       </form>
 
-      {error && <p>{error}</p>}
+      {error && <p className="admin-error">{error}</p>}
 
       <h2>Låtar ({songs.length})</h2>
 
-      <ul>
+      <ul className="song-list">
         {songs.map((song) => (
-          <li key={song.id}>
-            {song.artist} — {song.title} ({song.release_type})
+          <li key={song.id} className="song-item">
+            <span>
+              <span className="song-name">{song.title}</span>
+              <span className="song-artist"> — {song.artist}</span>
+            </span>
+
+            <span
+              className={
+                song.release_type === "early_access"
+                  ? "song-badge early"
+                  : "song-badge"
+              }
+            >
+              {song.release_type === "early_access" ? "Early access" : "Släppt"}
+            </span>
           </li>
         ))}
       </ul>
