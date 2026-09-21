@@ -9,6 +9,7 @@ import AuthPage from "./pages/AuthPage.tsx";
 import { API_URL, clearToken, getToken } from "./auth";
 import type { User } from "./auth";
 import Startpage from "./pages/Startpage.tsx";
+import ProfilePage from "./pages/ProfilePage.tsx";
 
 function App() {
   const [user, setUser] = useState<User | null>(null);
@@ -45,25 +46,26 @@ function App() {
   return (
     <BrowserRouter>
       <div className="app">
-        {!user ? (
-          <Routes>
-            <Route path="/" element={<Startpage />} />
+        <Navbar user={user} onLogout={handleLogout} />
 
-            <Route path="/login" element={<AuthPage onLoggedIn={setUser} />} />
-          </Routes>
-        ) : (
-          <div className="app">
-            <Navbar user={user} onLogout={handleLogout} />
-            <Sidebar />
+        <Sidebar />
 
-            <div className="main">
-              <Routes>
-                <Route path="/" element={<div>Dashboard</div>} />
-                {/* fler inloggade routes läggs till här */}
-              </Routes>
-            </div>
-          </div>
-        )}
+        <div className="main">
+          {!user ? (
+            <Routes>
+              <Route path="/" element={<Startpage />} />
+              <Route
+                path="/login"
+                element={<AuthPage onLoggedIn={setUser} />}
+              />
+            </Routes>
+          ) : (
+            <Routes>
+              <Route path="/" element={<div>Dashboard</div>} />
+              <Route path="/profile" element={<ProfilePage />} />
+            </Routes>
+          )}
+        </div>
       </div>
     </BrowserRouter>
   );

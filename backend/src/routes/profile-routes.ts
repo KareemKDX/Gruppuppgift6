@@ -10,7 +10,7 @@ router.get("/profile", authenticateToken, async (req, res) => {
     const result = await pool.query(
       `SELECT users.id, users.username, users.email, users.role, users.created_at,
               subscriptions.id AS subscription_id, subscriptions.name AS subscription_name,
-              subscriptions.price
+              subscriptions.price, subscriptions.early_access, subscriptions.playlist_limit
        FROM users
        JOIN subscriptions ON users.subscription_id = subscriptions.id
        WHERE users.id = $1`,

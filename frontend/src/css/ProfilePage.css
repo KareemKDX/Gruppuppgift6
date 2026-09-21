@@ -1,0 +1,106 @@
+.profile-wrapper {
+  display: flex;
+  margin-top: 200px;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  min-height: 100%;
+}
+
+.profile-card {
+  background-color: var(--bg-card);
+  border-radius: var(--radius);
+  padding: 12px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  gap: 1rem;
+  flex: 2;
+}
+
+.profile-container {
+  display: flex;
+  gap: 10px;
+  width: 800px;
+  flex-wrap: wrap;
+}
+.profile-right-content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+}
+
+.subscription-box {
+  width: 300px;
+}
+
+.subscription-color-text {
+  color: var(--color-border);
+}
+
+.profile-label {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #9aa0ab;
+}
+
+.subscription-box-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.change-subscription-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 16px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  color: var(--color-border);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.change-subscription-button:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.subscription-items {
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.subscription-items h4 {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #9aa0ab;
+  margin: 0 0 4px;
+}
+
+.subscription-items p {
+  font-size: 14px;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.subscription-items p::before {
+  content: "✓";
+  color: var(--color-border);
+  font-weight: 700;
+}

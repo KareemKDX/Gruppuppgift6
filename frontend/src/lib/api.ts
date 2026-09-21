@@ -1,8 +1,7 @@
-// src/lib/api.ts
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "http://localhost:4001/",
+  baseURL: "http://localhost:4001",
 });
 
 // lägg till token automatiskt om den finns

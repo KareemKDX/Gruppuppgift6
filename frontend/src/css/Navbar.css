@@ -1,0 +1,16 @@
+.btn-secondary-nav {
+  background-color: transparent;
+  color: var(--text-primary);
+  border: 2px solid;
+  border-color: var(--color-border);
+  padding: 6px 16px;
+  font-size: 12px;
+  font-weight: 700;
+}
+.btn-primary-nav {
+  background-color: var(--text-primary);
+  color: #000000;
+  padding: 6px 16px;
+  font-size: 12px;
+  font-weight: 700;
+}

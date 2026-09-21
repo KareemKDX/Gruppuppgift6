@@ -2,6 +2,7 @@ import "../css/Startpage.css";
 import { type Song } from "../types/song";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import api from "../lib/api";
 
 function Startpage() {
   const [songs, setSongs] = useState<Song[]>([]);
@@ -10,9 +11,11 @@ function Startpage() {
   useEffect(() => {
     async function fetchSongs() {
       try {
-        const res = await fetch("http://localhost:4001/api/songs");
-        const data = await res.json();
-        setSongs(data.slice(0, 3));
+        const res = await api.get("/api/songs");
+
+        const data = res.data;
+        console.log(data);
+        setSongs(data.slice(0, 4));
       } catch (error) {
         console.log(error);
       } finally {
@@ -29,26 +32,55 @@ function Startpage() {
 
   return (
     <div className="showcase-container">
-      <div className="showcase-grid">
-        {songs.map((song) => (
-          <div className="showcase-card" key={song.id}>
-            <div className="showcase-cover"></div>
-            <h4 className="showcase-title">{song.title}</h4>
-            <p className="showcase-artist">{song.artist}</p>
+      <div className="startpage-intro">
+        <p className="showcase-header">
+          Explore & listen to songs created around the world...
+        </p>
+        <div className="showcase-account-container">
+          <div>
+            <Link to="/register" className="btn btn-primary">
+              Create account
+            </Link>
           </div>
-        ))}
-      </div>
-      <p className="showcase-header">Explore more</p>
-      <div className="showcase-account-container">
-        <div>
-          <Link to="/register" className="btn btn-primary">
-            Create account
-          </Link>
+          <div>
+            <Link to="/login" className="btn btn-secondary">
+              Login
+            </Link>
+          </div>
         </div>
-        <div>
-          <Link to="/login" className="btn btn-secondary">
-            Login
-          </Link>
+      </div>
+      <div className="startpage-tracks-container">
+        <h2>Top Artists</h2>
+
+        <div className="artist-grid">
+          {songs.map((song) => (
+            <div className="artist-card" key={song.id}>
+              <div className="artist-cover"></div>
+              <h4 className="artist-title">{song.artist}</h4>
+            </div>
+          ))}
+        </div>
+
+        <h2>Top Tracks</h2>
+        <div className="showcase-grid">
+          {songs.map((song) => (
+            <div className="showcase-card" key={song.id}>
+              <div className="showcase-cover"></div>
+              <h4 className="showcase-title">{song.title}</h4>
+              <p className="showcase-artist">{song.artist}</p>
+            </div>
+          ))}
+        </div>
+
+        <h2>Top Albums</h2>
+        <div className="showcase-grid">
+          {songs.map((song) => (
+            <div className="showcase-card" key={song.id}>
+              <div className="showcase-cover"></div>
+              <h4 className="showcase-title">{song.album}</h4>
+              <p className="showcase-artist">{song.artist}</p>
+            </div>
+          ))}
         </div>
       </div>
     </div>
