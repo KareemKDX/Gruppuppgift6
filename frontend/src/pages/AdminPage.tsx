@@ -134,7 +134,7 @@ function AdminPage() {
               <span className="song-artist"> — {song.artist}</span>
             </span>
 
-            <span>
+            <span className="song-actions">
               <span
                 className={
                   song.release_type === "early_access"
@@ -145,7 +145,11 @@ function AdminPage() {
                 {song.release_type === "early_access" ? "Early access" : "Släppt"}
               </span>
 
-              <button type="button" onClick={() => handleToggle(song)}>
+              <button
+                type="button"
+                className="toggle-button"
+                onClick={() => handleToggle(song)}
+              >
                 {song.release_type === "early_access" ? "Gör släppt" : "Gör early access"}
               </button>
             </span>
