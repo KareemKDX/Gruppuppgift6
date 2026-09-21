@@ -1,24 +1,15 @@
+import "dotenv/config";
 import express from "express";
-import dotenv from "dotenv";
-import pg from "pg";
-
-dotenv.config();
-
-const { Pool } = pg;
+import cors from "cors";
+import { pool } from "./db";
+import authRouter from "./routes/auth";
 
 let app = express();
 
+app.use(cors());
 app.use(express.json());
 
-const pool = new Pool({
-  host: process.env.DB_HOST,
-  port: Number(process.env.DB_PORT),
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME,
-});
-
-app.use(express.json());
+app.use("/auth", authRouter);
 
 app.get("/test", async (req, res) => {
   const result = await pool.query("Select * from Subscriptions");
