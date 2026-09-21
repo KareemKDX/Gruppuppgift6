@@ -16,10 +16,10 @@ const ReleaseTypeSchema = z.object({
   release_type: z.enum(["released", "early_access"]),
 });
 
-// hämtar alla låtar från databasen
+// hämtar alla låtar från databasen, nyaste först
 export const getSongs = async (req: Request, res: Response) => {
   try {
-    const result = await pool.query("SELECT * FROM songs ORDER BY created_at DESC");
+    const result = await pool.query("SELECT * FROM songs ORDER BY created_at DESC, id DESC");
     res.json(result.rows);
   } catch (error) {
     console.log(error);
