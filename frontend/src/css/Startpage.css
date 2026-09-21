@@ -1,0 +1,63 @@
+.showcase-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 20px;
+  min-height: 100%;
+}
+
+.showcase-header {
+  color: var(--text-secondary);
+  font-size: 30px;
+}
+
+.showcase-grid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.showcase-card {
+  width: 350px;
+  background-color: var(--bg-card);
+  border-radius: var(--radius);
+  padding: 12px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.showcase-card:hover {
+  background-color: var(--bg-card-hover);
+}
+
+.showcase-cover {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background-color: #333;
+  border-radius: 4px;
+  margin-bottom: 12px;
+}
+
+.showcase-title {
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.showcase-artist {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-top: 4px;
+}
+
+.showcase-account-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 300px;
+}

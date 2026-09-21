@@ -19,6 +19,7 @@ body {
   --navbar-height: 64px;
   --sidebar-width: 160px;
   --radius: 6px;
+  --color-border: #b87333;
 }
 
 p,
@@ -28,6 +29,10 @@ h3,
 h4,
 h5 {
   margin: 0;
+}
+a {
+  text-decoration: none;
+  color: inherit;
 }
 
 /*PAGE LAYOUT (NAVBAR, SIDEBAR, MAIN*/
@@ -64,4 +69,32 @@ h5 {
   background-color: var(--bg-sidebar);
   overflow-y: auto;
   padding: 6px;
+}
+
+/*BUTTONS */
+.btn {
+  display: inline-block;
+  padding: 12px 32px;
+  border-radius: 500px;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+
+.btn-primary {
+  background-color: var(--text-primary);
+  color: #000000;
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: var(--text-primary);
+  border: 2px solid;
+  border-color: var(--color-border);
+}
+
+.btn:hover {
+  transform: scale(1.04);
 }
