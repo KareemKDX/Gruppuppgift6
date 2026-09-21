@@ -43,3 +43,25 @@ export const addSong = async (req: Request, res: Response) => {
     res.status(500).json({ error: "Kunde inte lägga till låt" });
   }
 };
+
+// ändrar om en låt är släppt eller early access
+export const updateReleaseType = async (req: Request, res: Response) => {
+  const id = Number(req.params.id);
+  const releaseType = req.body.release_type;
+
+  try {
+    const result = await pool.query(
+      "UPDATE songs SET release_type = $1 WHERE id = $2 RETURNING *",
+      [releaseType, id]
+    );
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: "Låten finns inte" });
+    }
+
+    res.json(result.rows[0]);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: "Kunde inte ändra låten" });
+  }
+};
