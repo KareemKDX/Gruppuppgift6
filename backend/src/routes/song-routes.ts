@@ -11,6 +11,11 @@ const NewSongSchema = z.object({
   release_type: z.enum(["released", "early_access"]),
 });
 
+// regler för när man ändrar om en låt är släppt eller early access
+const ReleaseTypeSchema = z.object({
+  release_type: z.enum(["released", "early_access"]),
+});
+
 // hämtar alla låtar från databasen
 export const getSongs = async (req: Request, res: Response) => {
   try {
@@ -47,7 +52,13 @@ export const addSong = async (req: Request, res: Response) => {
 // ändrar om en låt är släppt eller early access
 export const updateReleaseType = async (req: Request, res: Response) => {
   const id = Number(req.params.id);
-  const releaseType = req.body.release_type;
+  const validation = ReleaseTypeSchema.safeParse(req.body);
+
+  if (!validation.success) {
+    return res.status(400).json({ error: "Felaktig data", details: validation.error.issues });
+  }
+
+  const releaseType = validation.data.release_type;
 
   try {
     const result = await pool.query(
