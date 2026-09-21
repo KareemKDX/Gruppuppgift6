@@ -64,6 +64,22 @@ function AdminPage() {
     }
   };
 
+  // byter mellan släppt och early access
+  const handleToggle = async (song: Song) => {
+    setError("");
+
+    const newType = song.release_type === "early_access" ? "released" : "early_access";
+
+    try {
+      await axios.patch(`http://localhost:4001/api/songs/${song.id}`, {
+        release_type: newType,
+      });
+      fetchSongs();
+    } catch {
+      setError("Kunde inte ändra låten");
+    }
+  };
+
   return (
     <div className="admin-page">
       <h1>Adminvy</h1>
@@ -118,14 +134,24 @@ function AdminPage() {
               <span className="song-artist"> — {song.artist}</span>
             </span>
 
-            <span
-              className={
-                song.release_type === "early_access"
-                  ? "song-badge early"
-                  : "song-badge"
-              }
-            >
-              {song.release_type === "early_access" ? "Early access" : "Släppt"}
+            <span className="song-actions">
+              <span
+                className={
+                  song.release_type === "early_access"
+                    ? "song-badge early"
+                    : "song-badge"
+                }
+              >
+                {song.release_type === "early_access" ? "Early access" : "Släppt"}
+              </span>
+
+              <button
+                type="button"
+                className="toggle-button"
+                onClick={() => handleToggle(song)}
+              >
+                {song.release_type === "early_access" ? "Gör släppt" : "Gör early access"}
+              </button>
             </span>
           </li>
         ))}
