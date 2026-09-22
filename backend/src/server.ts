@@ -2,8 +2,8 @@ import "dotenv/config";
 import express from "express";
 import cors from "cors";
 import { pool } from "./db";
-import { getSongs } from "./routes/song-routes";
 import authRouter from "./routes/auth";
+import { getSongs, addSong, updateReleaseType } from "./routes/song-routes";
 import profileRouter from "./routes/profile-routes";
 import subscriptionRouter from "./routes/subscription-routes";
 
@@ -17,6 +17,9 @@ app.get("/api/songs", getSongs);
 app.use("/api", profileRouter);
 app.use("/api", subscriptionRouter);
 
+app.get("/api/songs", getSongs);
+app.post("/api/songs", addSong);
+app.patch("/api/songs/:id", updateReleaseType);
 app.get("/test", async (req, res) => {
   const result = await pool.query("Select * from Subscriptions");
   res.json(result.rows);

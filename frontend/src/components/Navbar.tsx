@@ -13,7 +13,9 @@ function Navbar({ user, onLogout }: Props) {
       <header className="navbar">
         <div className="navbar-logo">MusicPlate</div>
 
-        <div className="navbar-search-bar">Searchbar</div>
+        <div className="navbar-search-bar">
+          <input type="text" placeholder="Search songs, artists..." />
+        </div>
 
         <div className="navbar-user">
           {user ? (
@@ -23,9 +25,15 @@ function Navbar({ user, onLogout }: Props) {
                 My Profile
               </Link>
 
-              <button className="btn btn-primary-nav" onClick={onLogout}>
-                Logga ut
-              </button>
+              {user.role === "admin" && (
+                <Link to="/admin" className="btn btn-secondary-nav">
+                  Admin
+                </Link>
+              )}
+
+              <Link to="/" className="btn btn-primary-nav" onClick={onLogout}>
+                Logout
+              </Link>
             </>
           ) : (
             <Link to="/login" className="btn btn-secondary-nav">

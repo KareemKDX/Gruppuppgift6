@@ -9,6 +9,7 @@ import AuthPage from "./pages/AuthPage.tsx";
 import { API_URL, clearToken, getToken } from "./auth";
 import type { User } from "./auth";
 import Startpage from "./pages/Startpage.tsx";
+import AdminPage from "./pages/AdminPage.tsx";
 import ProfilePage from "./pages/ProfilePage.tsx";
 import SubscriptionPage from "./pages/SubscriptionPage.tsx";
 
@@ -65,6 +66,7 @@ function App() {
               <Route path="/" element={<div>Dashboard</div>} />
               <Route path="/profile" element={<ProfilePage />} />
               <Route path="/subscription" element={<SubscriptionPage />} />
+               <Route path="/Admin" element={<AdminPage />} />
             </Routes>
           )}
         </div>

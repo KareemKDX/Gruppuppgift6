@@ -1,0 +1,141 @@
+/* håller innehållet läsbart på breda skärmar */
+.admin-page {
+  max-width: 900px;
+}
+
+/* rubriker */
+.admin-page h1 {
+  font-size: 32px;
+  margin-bottom: 24px;
+}
+
+.admin-page h2 {
+  font-size: 20px;
+  margin-bottom: 16px;
+}
+
+/* formuläret ligger i ett kort */
+.admin-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background-color: var(--bg-card);
+  border-radius: var(--radius);
+  padding: 20px;
+  margin-bottom: 32px;
+  max-width: 480px;
+}
+
+.admin-form input,
+.admin-form select {
+  background-color: var(--bg-app);
+  color: var(--text-primary);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius);
+  padding: 10px 12px;
+  font-size: 14px;
+  font-family: inherit;
+}
+
+.admin-form input::placeholder {
+  color: var(--text-secondary);
+}
+
+.admin-form input:focus,
+.admin-form select:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.admin-form button {
+  background-color: var(--accent);
+  color: var(--bg-app);
+  border: none;
+  border-radius: 999px;
+  padding: 12px 24px;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  align-self: flex-start;
+  margin-top: 4px;
+}
+
+.admin-form button:hover {
+  opacity: 0.85;
+}
+
+/* felmeddelande */
+.admin-error {
+  color: #ff6b6b;
+  margin-bottom: 16px;
+}
+
+/* listan med låtar */
+.song-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.song-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--bg-card);
+  border-radius: var(--radius);
+  padding: 12px 16px;
+}
+
+.song-item:hover {
+  background-color: var(--bg-card-hover);
+}
+
+.song-name {
+  color: var(--text-primary);
+}
+
+.song-artist {
+  color: var(--text-secondary);
+}
+
+/* märke som visar om låten är släppt eller early access */
+.song-badge {
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background-color: rgba(255, 255, 255, 0.08);
+  color: var(--text-secondary);
+}
+
+.song-badge.early {
+  background-color: var(--accent);
+  color: var(--bg-app);
+}
+
+/* märke och knapp till höger på varje låt */
+.song-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* knapp som byter mellan släppt och early access */
+.toggle-button {
+  background-color: transparent;
+  color: var(--text-secondary);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 999px;
+  padding: 4px 12px;
+  font-size: 12px;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.toggle-button:hover {
+  color: var(--text-primary);
+  border-color: var(--text-primary);
+}

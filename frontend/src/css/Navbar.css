@@ -3,14 +3,48 @@
   color: var(--text-primary);
   border: 2px solid;
   border-color: var(--color-border);
-  padding: 6px 16px;
+  padding: 2px 10px;
   font-size: 12px;
-  font-weight: 700;
 }
 .btn-primary-nav {
   background-color: var(--text-primary);
   color: #000000;
-  padding: 6px 16px;
+  padding: 2px 10px;
   font-size: 12px;
-  font-weight: 700;
+}
+
+.navbar-search-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: rgba(255, 255, 255, 0.06);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 999px;
+  padding: 8px 16px;
+  max-width: 400px;
+  width: 100%;
+}
+
+.navbar-search-bar:focus-within {
+  border-color: var(--text-secondary);
+}
+
+.navbar-search-bar input {
+  background: none;
+  border: none;
+  outline: none;
+  color: #e8eaed;
+  font-size: 14px;
+  width: 100%;
+}
+
+.search-icon {
+  font-size: 14px;
+  opacity: 0.6;
+}
+
+.navbar-logo {
+  font: 1em sans-serif;
+  font-weight: 300;
+  font-size: 22px;
 }
