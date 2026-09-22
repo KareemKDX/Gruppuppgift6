@@ -10,6 +10,7 @@ import { API_URL, clearToken, getToken } from "./auth";
 import type { User } from "./auth";
 import Startpage from "./pages/Startpage.tsx";
 import ProfilePage from "./pages/ProfilePage.tsx";
+import SubscriptionPage from "./pages/SubscriptionPage.tsx";
 
 function App() {
   const [user, setUser] = useState<User | null>(null);
@@ -63,6 +64,7 @@ function App() {
             <Routes>
               <Route path="/" element={<div>Dashboard</div>} />
               <Route path="/profile" element={<ProfilePage />} />
+              <Route path="/subscription" element={<SubscriptionPage />} />
             </Routes>
           )}
         </div>

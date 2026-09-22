@@ -4,6 +4,7 @@ import { authenticateToken } from "../middleware/auth";
 
 const router = Router();
 
+//FETCH ALL PROFILE INFO
 router.get("/profile", authenticateToken, async (req, res) => {
   console.log("profile router loaded");
   try {

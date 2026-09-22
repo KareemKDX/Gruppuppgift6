@@ -5,6 +5,7 @@ import { pool } from "./db";
 import { getSongs } from "./routes/song-routes";
 import authRouter from "./routes/auth";
 import profileRouter from "./routes/profile-routes";
+import subscriptionRouter from "./routes/subscription-routes";
 
 let app = express();
 
@@ -14,6 +15,7 @@ app.use(express.json());
 app.use("/auth", authRouter);
 app.get("/api/songs", getSongs);
 app.use("/api", profileRouter);
+app.use("/api", subscriptionRouter);
 
 app.get("/test", async (req, res) => {
   const result = await pool.query("Select * from Subscriptions");
