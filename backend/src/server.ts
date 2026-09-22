@@ -4,7 +4,7 @@ import cors from "cors";
 import { pool } from "./db";
 import authRouter from "./routes/auth";
 import { getSongs, addSong, updateReleaseType } from "./routes/song-routes";
-import { getContentPages } from "./routes/content-routes";
+import { getContentPages, addContentPage } from "./routes/content-routes";
 import profileRouter from "./routes/profile-routes";
 import subscriptionRouter from "./routes/subscription-routes";
 
@@ -21,6 +21,7 @@ app.get("/api/songs", getSongs);
 app.post("/api/songs", addSong);
 app.patch("/api/songs/:id", updateReleaseType);
 app.get("/api/content-pages", getContentPages);
+app.post("/api/content-pages", addContentPage);
 app.get("/test", async (req, res) => {
   const result = await pool.query("Select * from Subscriptions");
   res.json(result.rows);
