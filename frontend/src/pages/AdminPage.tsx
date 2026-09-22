@@ -12,16 +12,28 @@ type Song = {
   release_type: string;
 };
 
+// hur en prenumerationsnivå ser ut
+type Subscription = {
+  id: number;
+  name: string;
+};
+
 function AdminPage() {
   const [songs, setSongs] = useState<Song[]>([]);
+  const [subscriptions, setSubscriptions] = useState<Subscription[]>([]);
   const [error, setError] = useState("");
 
-  // fälten i formuläret
+  // fälten i låtformuläret
   const [artist, setArtist] = useState("");
   const [title, setTitle] = useState("");
   const [album, setAlbum] = useState("");
   const [duration, setDuration] = useState("");
   const [releaseType, setReleaseType] = useState("released");
+
+  // fälten i formuläret för innehållssidor
+  const [pageTitle, setPageTitle] = useState("");
+  const [pageContent, setPageContent] = useState("");
+  const [requiredLevel, setRequiredLevel] = useState("");
 
   // hämtar alla låtar från databasen
   const fetchSongs = async () => {
@@ -33,9 +45,27 @@ function AdminPage() {
     }
   };
 
-  // hämtar låtarna när sidan laddas
+  // hämtar alla nivåer så man kan välja i formuläret
+  const fetchSubscriptions = async () => {
+    try {
+      const response = await axios.get<{ subscriptions: Subscription[] }>(
+        "http://localhost:4001/api/subscriptions"
+      );
+      setSubscriptions(response.data.subscriptions);
+
+      // väljer första nivån som standard
+      if (response.data.subscriptions.length > 0) {
+        setRequiredLevel(String(response.data.subscriptions[0].id));
+      }
+    } catch {
+      setError("Kunde inte hämta nivåer");
+    }
+  };
+  
+  // hämtar allt när sidan laddas
   useEffect(() => {
     fetchSongs();
+    fetchSubscriptions();
   }, []);
 
   // skickar den nya låten till servern
@@ -80,6 +110,26 @@ function AdminPage() {
     }
   };
 
+  // skickar den nya innehållssidan till servern
+  const handlePageSubmit = async (event: React.FormEvent) => {
+    event.preventDefault();
+    setError("");
+
+    try {
+      await axios.post("http://localhost:4001/api/content-pages", {
+        title: pageTitle,
+        content: pageContent,
+        required_subscription_id: Number(requiredLevel),
+      });
+
+      // tömmer formuläret
+      setPageTitle("");
+      setPageContent("");
+    } catch {
+      setError("Kunde inte lägga till innehållssidan");
+    }
+  };
+
   return (
     <div className="admin-page">
       <h1>Adminvy</h1>
@@ -120,6 +170,36 @@ function AdminPage() {
         </select>
 
         <button type="submit">Spara låt</button>
+      </form>
+
+      <h2>Lägg till innehållssida</h2>
+
+      <form className="admin-form" onSubmit={handlePageSubmit}>
+        <input
+          placeholder="Rubrik"
+          value={pageTitle}
+          onChange={(event) => setPageTitle(event.target.value)}
+        />
+
+        <textarea
+          placeholder="Innehåll"
+          rows={5}
+          value={pageContent}
+          onChange={(event) => setPageContent(event.target.value)}
+        />
+
+        <select
+          value={requiredLevel}
+          onChange={(event) => setRequiredLevel(event.target.value)}
+        >
+          {subscriptions.map((subscription) => (
+            <option key={subscription.id} value={subscription.id}>
+              Kräver {subscription.name}
+            </option>
+          ))}
+        </select>
+
+        <button type="submit">Spara sida</button>
       </form>
 
       {error && <p className="admin-error">{error}</p>}
