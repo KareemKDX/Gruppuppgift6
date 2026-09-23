@@ -18,9 +18,18 @@ type Subscription = {
   name: string;
 };
 
+// hur en innehållssida ser ut
+type ContentPage = {
+  id: number;
+  title: string;
+  content: string;
+  required_subscription_id: number;
+};
+
 function AdminPage() {
   const [songs, setSongs] = useState<Song[]>([]);
   const [subscriptions, setSubscriptions] = useState<Subscription[]>([]);
+  const [contentPages, setContentPages] = useState<ContentPage[]>([]);
   const [error, setError] = useState("");
 
   // fälten i låtformuläret
@@ -61,12 +70,31 @@ function AdminPage() {
       setError("Kunde inte hämta nivåer");
     }
   };
-  
+
+  // hämtar alla innehållssidor från databasen
+  const fetchContentPages = async () => {
+    try {
+      const response = await axios.get<ContentPage[]>(
+        "http://localhost:4001/api/content-pages"
+      );
+      setContentPages(response.data);
+    } catch {
+      setError("Kunde inte hämta innehållssidor");
+    }
+  };
+
   // hämtar allt när sidan laddas
   useEffect(() => {
     fetchSongs();
     fetchSubscriptions();
+    fetchContentPages();
   }, []);
+
+  // hittar namnet på en nivå utifrån id
+  const getLevelName = (id: number) => {
+    const subscription = subscriptions.find((item) => item.id === id);
+    return subscription ? subscription.name : "Okänd";
+  };
 
   // skickar den nya låten till servern
   const handleSubmit = async (event: React.FormEvent) => {
@@ -122,9 +150,13 @@ function AdminPage() {
         required_subscription_id: Number(requiredLevel),
       });
 
-      // tömmer formuläret
+      // tömmer formuläret och hämtar listan på nytt
       setPageTitle("");
       setPageContent("");
+      if (subscriptions.length > 0) {
+        setRequiredLevel(String(subscriptions[0].id));
+      }
+      fetchContentPages();
     } catch {
       setError("Kunde inte lägga till innehållssidan");
     }
@@ -203,6 +235,23 @@ function AdminPage() {
       </form>
 
       {error && <p className="admin-error">{error}</p>}
+
+      <h2>Innehållssidor ({contentPages.length})</h2>
+
+      <ul className="page-list">
+        {contentPages.map((page) => (
+          <li key={page.id} className="page-item">
+            <div className="page-header">
+              <span className="page-title">{page.title}</span>
+              <span className="song-badge">
+                Kräver {getLevelName(page.required_subscription_id)}
+              </span>
+            </div>
+
+            <p className="page-content">{page.content}</p>
+          </li>
+        ))}
+      </ul>
 
       <h2>Låtar ({songs.length})</h2>
 
