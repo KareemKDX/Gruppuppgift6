@@ -1,27 +1,56 @@
-.home-layout {
+.homepage-layout {
   display: flex;
-  gap: 16px;
+
   height: 100%;
 }
 
-.home-menu-left {
+.homepage-menu-left {
   flex: 2;
   display: flex;
   flex-direction: column;
-  background-color: var(--bg-card);
+
   border-radius: var(--radius);
   overflow-y: auto;
   scrollbar-width: thin;
-  scrollbar-color: var(--bg-card) transparent;
+  scrollbar-color: transparent transparent;
+  /* Firefox */
+  scrollbar-width: thin;
+
+  /* IE/old Edge */
+  -ms-overflow-style: none;
 }
-.home-menu-left::-webkit-scrollbar-track {
+
+/* Chrome / Edge / Safari */
+.homepage-menu-left::-webkit-scrollbar {
+  width: 6px;
+}
+
+.homepage-menu-left::-webkit-scrollbar-track {
   background: transparent;
 }
 
-.home-menu-right {
+.homepage-menu-left::-webkit-scrollbar-thumb {
+  background-color: transparent;
+  border-radius: 999px;
+}
+
+/* När man scrollar */
+.homepage-menu-left.is-scrolling {
+  scrollbar-color: #6b7280 transparent;
+}
+
+.homepage-menu-left.is-scrolling::-webkit-scrollbar-thumb {
+  background-color: #6b7280;
+}
+
+.homepage-menu-right {
+  display: flex;
+  justify-content: center;
   flex: 1;
   background-color: var(--bg-card);
   border-radius: var(--radius);
+  margin-top: 10px;
+  margin-right: 6px;
 }
 
 .home-header {
@@ -103,13 +132,14 @@
   transition: background-color 0.15s ease;
 }
 
-.song-row-right:hover {
-  background-color: rgba(255, 255, 255, 0.06);
-}
-
 .song-card {
   display: flex;
   justify-content: space-between;
+}
+
+.song-card:hover {
+  background-color: rgba(255, 255, 255, 0.06);
+  border-radius: var(--radius);
 }
 
 .song-index {
@@ -149,6 +179,21 @@
   color: #9aa0ab;
   white-space: nowrap;
   overflow: hidden;
+}
+
+.selected-song-title {
+  font-size: 32px;
+  font-weight: 500;
+  color: #e8eaed;
+  white-space: nowrap;
+}
+
+.selected-song-artist {
+  margin-top: 5px;
+  font-size: 20px;
+  color: #9aa0ab;
+  white-space: nowrap;
+  overflow: hidden;
   text-overflow: ellipsis;
 }
 
@@ -158,4 +203,24 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.selected-song-header-content {
+  padding: 8px;
+  border-top: 2px solid var(--color-border-faded-green);
+
+  border-radius: var(--radius);
+}
+.home-right-header {
+  width: 100%;
+  padding: 3px;
+}
+.select-image-container {
+  width: 100%;
+  padding: 3px;
+}
+
+.right-cover {
+  width: 100%;
+  border-radius: var(--radius);
 }

@@ -9,6 +9,9 @@ function HomePage() {
   const [songs, setSongs] = useState<Song[]>([]);
   const [loading, setLoading] = useState(true);
 
+  const [selectedSong, setSelectedSong] = useState<Song | null>(null);
+  const [loadingSong, setLoadingSong] = useState(false);
+
   useEffect(() => {
     async function fetchSongs() {
       try {
@@ -27,6 +30,20 @@ function HomePage() {
     fetchSongs();
   }, []);
 
+  async function handleSongClick(id: number) {
+    setLoadingSong(true);
+    try {
+      const res = await api.get(`/api/songs/${id}`);
+      setSelectedSong(res.data);
+      console.log("handleSongClick called.");
+      console.log(res.data);
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setLoadingSong(false);
+    }
+  }
+
   function songDurationToString(duration: number): string {
     const minutes = Math.floor(duration / 60);
     const seconds = duration % 60;
@@ -40,8 +57,8 @@ function HomePage() {
   }
 
   return (
-    <div className="home-layout">
-      <div className="home-menu-left">
+    <div className="homepage-layout">
+      <div className="homepage-menu-left">
         <div className="home-header">
           <div className="playlist-text">
             <span className="home-header-label">Playlist</span>
@@ -58,7 +75,11 @@ function HomePage() {
 
           <div className="song-list">
             {songs.map((song, index) => (
-              <div className="song-card" key={song.id}>
+              <div
+                className="song-card"
+                key={song.id}
+                onClick={() => handleSongClick(song.id)}
+              >
                 <div className="song-row-right">
                   <span className="song-index">{index + 1}</span>
 
@@ -85,10 +106,30 @@ function HomePage() {
         </div>
       </div>
 
-      <div className="home-menu-right">
-        <div className="right-header">
-          <h4>HEADER</h4>
-        </div>
+      <div className="homepage-menu-right">
+        {loadingSong ? (
+          <p>Loading...</p>
+        ) : selectedSong ? (
+          <div className="home-right-header">
+            <div className="selected-image-container">
+              <img
+                src={selectedSong.image_url}
+                alt={selectedSong.title}
+                className="right-cover"
+              />
+
+              <div className="selected-song-header-content">
+                <h2 className="selected-song-title">{selectedSong.title}</h2>
+                <p className="selected-song-artist">{selectedSong.artist}</p>
+                <p>{songDurationToString(selectedSong.duration)}</p>
+              </div>
+            </div>
+          </div>
+        ) : (
+          <div className="home-right-header">
+            <h4>No song selected.</h4>
+          </div>
+        )}
       </div>
     </div>
   );
