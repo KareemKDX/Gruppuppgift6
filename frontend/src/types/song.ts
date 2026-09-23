@@ -5,4 +5,6 @@ export interface Song {
   album: string;
   cover_url?: string;
   created_at: string;
+  image_url: string;
+  duration: number;
 }

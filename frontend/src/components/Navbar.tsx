@@ -11,7 +11,9 @@ function Navbar({ user, onLogout }: Props) {
   return (
     <>
       <header className="navbar">
-        <div className="navbar-logo">MusicPlate</div>
+        <Link to="/" className="navbar-logo">
+          MusicPlate
+        </Link>
 
         <div className="navbar-search-bar">
           <input type="text" placeholder="Search songs, artists..." />

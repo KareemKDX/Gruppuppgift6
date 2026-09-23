@@ -97,3 +97,5 @@ VALUES
     ('Basic', 0, FALSE),
     ('Plus', 5, FALSE),
     ('Premium', 10, TRUE);
+
+

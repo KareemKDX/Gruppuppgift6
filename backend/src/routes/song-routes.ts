@@ -29,6 +29,27 @@ export const getSongs = async (req: Request, res: Response) => {
   }
 };
 
+export const getSongById = async (req: Request, res: Response) => {
+  const { id } = req.params;
+
+  try {
+    const result = await pool.query("SELECT * FROM songs WHERE id = $1", [id]);
+
+    const song = result.rows[0];
+
+    if (!song) {
+      return res
+        .status(404)
+        .json({ error: "Couldn't find song with id: " + id });
+    }
+
+    res.json(song);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: "Kunde inte hämta låten" });
+  }
+};
+
 // lägger till en ny låt i databasen
 export const addSong = async (req: Request, res: Response) => {
   const validation = NewSongSchema.safeParse(req.body);

@@ -15,3 +15,9 @@ VALUES
     ('Burna Boy', 'Ye', 'Outside', 213, 'early_access'),
     ('Frankie Knuckles', 'Your Love', 'Your Love', 355, 'early_access'),
     ('Ebba Grön', 'Staten och kapitalet', 'Kärlek och uppror', 198, 'early_access');
+
+
+    
+/*UPDATE ALL SONG IDS IN TABLE WITH IMAGE URL*/
+
+UPDATE songs SET image_url = CONCAT('https://picsum.photos/300/300?random=', id);

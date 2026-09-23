@@ -3,7 +3,12 @@ import express from "express";
 import cors from "cors";
 import { pool } from "./db";
 import authRouter from "./routes/auth";
-import { getSongs, addSong, updateReleaseType } from "./routes/song-routes";
+import {
+  getSongs,
+  addSong,
+  updateReleaseType,
+  getSongById,
+} from "./routes/song-routes";
 import profileRouter from "./routes/profile-routes";
 import subscriptionRouter from "./routes/subscription-routes";
 
@@ -19,7 +24,9 @@ app.use("/api", subscriptionRouter);
 
 app.get("/api/songs", getSongs);
 app.post("/api/songs", addSong);
+app.get("/api/songs/:id", getSongById);
 app.patch("/api/songs/:id", updateReleaseType);
+
 app.get("/test", async (req, res) => {
   const result = await pool.query("Select * from Subscriptions");
   res.json(result.rows);

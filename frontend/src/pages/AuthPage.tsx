@@ -3,6 +3,7 @@ import axios from "axios";
 import { API_URL, setToken } from "../auth";
 import type { User } from "../auth";
 import "../css/AuthPage.css";
+import { useNavigate } from "react-router-dom";
 
 type Props = {
   onLoggedIn: (user: User) => void;
@@ -14,6 +15,8 @@ function AuthPage({ onLoggedIn }: Props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+
+  const navigate = useNavigate();
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -27,12 +30,15 @@ function AuthPage({ onLoggedIn }: Props) {
     try {
       const response = await axios.post<{ token: string; user: User }>(
         `${API_URL}/auth/${mode}`,
-        body
+        body,
       );
       setToken(response.data.token);
       onLoggedIn(response.data.user);
+      navigate("/");
     } catch (error) {
-      const status = axios.isAxiosError(error) ? error.response?.status : undefined;
+      const status = axios.isAxiosError(error)
+        ? error.response?.status
+        : undefined;
 
       if (status === 400) {
         setError("Fyll i alla fält");
@@ -42,7 +48,7 @@ function AuthPage({ onLoggedIn }: Props) {
         setError("Emailen är redan använd");
       } else {
         setError(
-          mode === "login" ? "Kunde inte logga in" : "Kunde inte skapa konto"
+          mode === "login" ? "Kunde inte logga in" : "Kunde inte skapa konto",
         );
       }
     }

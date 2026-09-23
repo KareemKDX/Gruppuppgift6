@@ -55,7 +55,11 @@ function Startpage() {
         <div className="artist-grid">
           {songs.map((song) => (
             <div className="artist-card" key={song.id}>
-              <div className="artist-cover"></div>
+              <img
+                src={song.image_url}
+                alt={song.title}
+                className="artist-cover"
+              />
               <h4 className="artist-title">{song.artist}</h4>
             </div>
           ))}
@@ -65,7 +69,11 @@ function Startpage() {
         <div className="showcase-grid">
           {songs.map((song) => (
             <div className="showcase-card" key={song.id}>
-              <div className="showcase-cover"></div>
+              <img
+                src={song.image_url}
+                alt={song.title}
+                className="showcase-cover"
+              />
               <h4 className="showcase-title">{song.title}</h4>
               <p className="showcase-artist">{song.artist}</p>
             </div>
@@ -76,7 +84,11 @@ function Startpage() {
         <div className="showcase-grid">
           {songs.map((song) => (
             <div className="showcase-card" key={song.id}>
-              <div className="showcase-cover"></div>
+              <img
+                src={song.image_url}
+                alt={song.title}
+                className="showcase-cover"
+              />
               <h4 className="showcase-title">{song.album}</h4>
               <p className="showcase-artist">{song.artist}</p>
             </div>
