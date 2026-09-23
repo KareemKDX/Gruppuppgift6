@@ -27,7 +27,8 @@
 }
 
 .admin-form input,
-.admin-form select {
+.admin-form select,
+.admin-form textarea {
   background-color: var(--bg-app);
   color: var(--text-primary);
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -37,12 +38,14 @@
   font-family: inherit;
 }
 
-.admin-form input::placeholder {
+.admin-form input::placeholder,
+.admin-form textarea::placeholder {
   color: var(--text-secondary);
 }
 
 .admin-form input:focus,
-.admin-form select:focus {
+.admin-form select:focus,
+.admin-form textarea:focus {
   outline: none;
   border-color: var(--accent);
 }
@@ -138,4 +141,44 @@
 .toggle-button:hover {
   color: var(--text-primary);
   border-color: var(--text-primary);
+}
+
+/* listan med innehållssidor */
+.page-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 32px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.page-item {
+  background-color: var(--bg-card);
+  border-radius: var(--radius);
+  padding: 16px;
+}
+
+.page-item:hover {
+  background-color: var(--bg-card-hover);
+}
+
+/* rubrik och nivåmärke på samma rad */
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.page-title {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.page-content {
+  color: var(--text-secondary);
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
 }
