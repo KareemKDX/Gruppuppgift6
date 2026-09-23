@@ -9,9 +9,9 @@ VALUES
     ('Nina Simone', 'Feeling Good', 'I Put a Spell on You', 175, 'released'),
     ('Fela Kuti', 'Zombie', 'Zombie', 744, 'released'),
     ('Timbuktu', 'Alla vill till himmelen', 'Sagolandet', 224, 'released'),
-    ('Toots and the Maytals', 'Pressure Drop', 'Monkey Man', 172, 'released'),
-    ('Kraftwerk', 'The Model', 'Die Mensch-Maschine', 218, 'released'),
-    ('Missy Elliott', 'Get Ur Freak On', 'Miss E... So Addictive', 203, 'early_access'),
+    ('Kool & The Gang', 'Summer Madness', 'Light of Worlds', 258, 'released'),
+    ('Soul For Real', 'Candy Rain', 'Candy Rain', 271, 'released'),
+    ('The Isley Brothers', 'Footsteps in the Dark, Pts. 1 & 2', 'Go for Your Guns', 304, 'early_access'),
     ('Burna Boy', 'Ye', 'Outside', 213, 'early_access'),
-    ('Frankie Knuckles', 'Your Love', 'Your Love', 355, 'early_access'),
-    ('Ebba Grön', 'Staten och kapitalet', 'Kärlek och uppror', 198, 'early_access');
+    ('Bobby Caldwell', 'My Flame', 'Bobby Caldwell', 253, 'early_access'),
+    ('James Brown', 'The Payback', 'The Payback', 459, 'early_access');
