@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import api from "../lib/api";
 import "../css/AdminPage.css";
 
 // hur en låt ser ut när den kommer från databasen
@@ -47,7 +47,7 @@ function AdminPage() {
   // hämtar alla låtar från databasen
   const fetchSongs = async () => {
     try {
-      const response = await axios.get<Song[]>("http://localhost:4001/api/songs");
+      const response = await api.get<Song[]>("/api/songs");
       setSongs(response.data);
     } catch {
       setError("Kunde inte hämta låtar");
@@ -57,8 +57,8 @@ function AdminPage() {
   // hämtar alla nivåer så man kan välja i formuläret
   const fetchSubscriptions = async () => {
     try {
-      const response = await axios.get<{ subscriptions: Subscription[] }>(
-        "http://localhost:4001/api/subscriptions"
+      const response = await api.get<{ subscriptions: Subscription[] }>(
+        "/api/subscriptions"
       );
       setSubscriptions(response.data.subscriptions);
 
@@ -74,9 +74,7 @@ function AdminPage() {
   // hämtar alla innehållssidor från databasen
   const fetchContentPages = async () => {
     try {
-      const response = await axios.get<ContentPage[]>(
-        "http://localhost:4001/api/content-pages"
-      );
+      const response = await api.get<ContentPage[]>("/api/content-pages");
       setContentPages(response.data);
     } catch {
       setError("Kunde inte hämta innehållssidor");
@@ -102,7 +100,7 @@ function AdminPage() {
     setError("");
 
     try {
-      await axios.post("http://localhost:4001/api/songs", {
+      await api.post("/api/songs", {
         artist: artist,
         title: title,
         album: album || undefined,
@@ -129,7 +127,7 @@ function AdminPage() {
     const newType = song.release_type === "early_access" ? "released" : "early_access";
 
     try {
-      await axios.patch(`http://localhost:4001/api/songs/${song.id}`, {
+      await api.patch(`/api/songs/${song.id}`, {
         release_type: newType,
       });
       fetchSongs();
@@ -144,7 +142,7 @@ function AdminPage() {
     setError("");
 
     try {
-      await axios.post("http://localhost:4001/api/content-pages", {
+      await api.post("/api/content-pages", {
         title: pageTitle,
         content: pageContent,
         required_subscription_id: Number(requiredLevel),

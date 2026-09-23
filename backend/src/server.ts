@@ -3,6 +3,8 @@ import express from "express";
 import cors from "cors";
 import { pool } from "./db";
 import authRouter from "./routes/auth";
+import { authenticateToken } from "./middleware/auth";
+import { requireAdmin } from "./middleware/require-admin";
 import { getSongs, addSong, updateReleaseType } from "./routes/song-routes";
 import { getContentPages, addContentPage } from "./routes/content-routes";
 import profileRouter from "./routes/profile-routes";
@@ -18,10 +20,10 @@ app.use("/api", profileRouter);
 app.use("/api", subscriptionRouter);
 
 app.get("/api/songs", getSongs);
-app.post("/api/songs", addSong);
-app.patch("/api/songs/:id", updateReleaseType);
+app.post("/api/songs", authenticateToken, requireAdmin, addSong);
+app.patch("/api/songs/:id", authenticateToken, requireAdmin, updateReleaseType);
 app.get("/api/content-pages", getContentPages);
-app.post("/api/content-pages", addContentPage);
+app.post("/api/content-pages", authenticateToken, requireAdmin, addContentPage);
 app.get("/test", async (req, res) => {
   const result = await pool.query("Select * from Subscriptions");
   res.json(result.rows);
