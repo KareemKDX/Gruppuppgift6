@@ -168,18 +168,17 @@ function HomePage() {
           <div className="home-right-header">
             <div className="selected-image-container">
               <img
+                className="right-cover"
                 src={selectedSong.image_url}
                 alt={selectedSong.title}
-                className="right-cover"
               />
-
-              <div className="selected-song-header-content">
-                <h2 className="selected-song-title">{selectedSong.title}</h2>
-                <p className="selected-song-artist">{selectedSong.artist}</p>
-                <p className="selected-song-duration">
-                  Duration: {songDurationToString(selectedSong.duration)}
-                </p>
-              </div>
+            </div>
+            <div className="selected-song-header-content">
+              <h2 className="selected-song-title">{selectedSong.title}</h2>
+              <p className="selected-song-artist">{selectedSong.artist}</p>
+              <p className="selected-song-duration">
+                Duration: {songDurationToString(selectedSong.duration)}
+              </p>
             </div>
           </div>
         ) : (
