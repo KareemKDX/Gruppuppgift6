@@ -3,6 +3,10 @@ import express from "express";
 import cors from "cors";
 import { pool } from "./db";
 import authRouter from "./routes/auth";
+import { authenticateToken } from "./middleware/auth";
+import { requireAdmin } from "./middleware/require-admin";
+import { getSongs, addSong, updateReleaseType } from "./routes/song-routes";
+import { getContentPages, addContentPage } from "./routes/content-routes";
 import {
   getSongs,
   addSong,
@@ -19,11 +23,14 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/auth", authRouter);
-app.get("/api/songs", getSongs);
 app.use("/api", profileRouter);
 app.use("/api", subscriptionRouter);
 
 app.get("/api/songs", getSongs);
+app.post("/api/songs", authenticateToken, requireAdmin, addSong);
+app.patch("/api/songs/:id", authenticateToken, requireAdmin, updateReleaseType);
+app.get("/api/content-pages", getContentPages);
+app.post("/api/content-pages", authenticateToken, requireAdmin, addContentPage);
 app.post("/api/songs", addSong);
 app.get("/api/songs/:id", authenticateToken, getSongById);
 app.patch("/api/songs/:id", updateReleaseType);
