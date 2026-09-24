@@ -5,6 +5,9 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import api from "../lib/api";
 
+//USE TO FILTER SONG SELECTION
+type FilterType = "all" | "released" | "early_access";
+
 function HomePage() {
   const [songs, setSongs] = useState<Song[]>([]);
   const [loading, setLoading] = useState(true);
@@ -14,6 +17,9 @@ function HomePage() {
 
   const [userHasEarlyAccess, setUserHasEarlyAccess] = useState(false);
 
+  const [filter, setFilter] = useState<FilterType>("all");
+
+  //FETCH BOTH SONG AND PROFILE TABLE
   useEffect(() => {
     async function fetchData() {
       try {
@@ -34,6 +40,7 @@ function HomePage() {
     fetchData();
   }, []);
 
+  //FETCH SONG BY ID AND SAVE IT TO SELECTED SONG STATE
   async function handleSongClick(id: number) {
     setLoadingSong(true);
     try {
@@ -48,11 +55,16 @@ function HomePage() {
     }
   }
 
+  const filteredSongs = songs.filter((song) => {
+    if (filter === "all") return true;
+    return song.release_type === filter;
+  });
+
+  //FUNCTION TO COUNT SECONDS AS MINUTES AND REMAINDER AS SECONDS
   function songDurationToString(duration: number): string {
     const minutes = Math.floor(duration / 60);
     const seconds = duration % 60;
     const timeString = minutes + "min " + seconds + "sec";
-
     return timeString;
   }
 
@@ -75,13 +87,28 @@ function HomePage() {
             <button className="play-button" aria-label="Play all">
               ▶
             </button>
-            <button className="btn header-action-button">ALL</button>
-            <button className="btn header-action-button">RELEASED</button>
-            <button className="btn header-action-button">EARLY ACCESS</button>
+            <button
+              className={`btn header-action-button ${filter === "all" ? "active" : ""}`}
+              onClick={() => setFilter("all")}
+            >
+              All
+            </button>
+            <button
+              className={`btn header-action-button ${filter === "released" ? "active" : ""}`}
+              onClick={() => setFilter("released")}
+            >
+              Released
+            </button>
+            <button
+              className={`btn header-action-button ${filter === "early_access" ? "active" : ""}`}
+              onClick={() => setFilter("early_access")}
+            >
+              Early access
+            </button>
           </div>
 
           <div className="song-list">
-            {songs.map((song, index) => {
+            {filteredSongs.map((song, index) => {
               const isLocked =
                 song.release_type === "early_access" && !userHasEarlyAccess;
 

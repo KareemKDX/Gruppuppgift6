@@ -71,7 +71,7 @@ a {
   flex-direction: column;
   grid-area: sidebar;
   overflow-y: auto;
-  padding-right: 16px;
+  margin-right: 6px;
 }
 
 .navbar-user {
