@@ -279,3 +279,8 @@
   padding: 3px;
   opacity: 1;
 }
+
+.header-action-button.active {
+  background-color: black;
+  border: 1px solid whitesmoke;
+}
