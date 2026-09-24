@@ -13,14 +13,10 @@
   overflow-y: auto;
   scrollbar-width: thin;
   scrollbar-color: transparent transparent;
-  /* Firefox */
   scrollbar-width: thin;
-
-  /* IE/old Edge */
   -ms-overflow-style: none;
 }
 
-/* Chrome / Edge / Safari */
 .homepage-menu-left::-webkit-scrollbar {
   width: 6px;
 }
@@ -34,7 +30,6 @@
   border-radius: 999px;
 }
 
-/* När man scrollar */
 .homepage-menu-left.is-scrolling {
   scrollbar-color: #6b7280 transparent;
 }
@@ -89,6 +84,19 @@
 .home-header-actions {
   display: flex;
   align-items: center;
+  gap: 10px;
+  background-color: var(--bg-card-dark);
+  border-radius: var(--radius);
+  padding: 6px;
+}
+
+.header-action-button {
+  border-radius: var(--radius);
+  background-color: rgba(255, 255, 255, 0.06);
+  border: none;
+  color: #e8eaed;
+  font-size: 12px;
+  padding: 5px;
 }
 
 .play-button {
@@ -116,10 +124,28 @@
   margin-bottom: 70px;
 }
 
+.locked {
+  opacity: 0.4;
+  pointer-events: none;
+  cursor: not-allowed;
+}
+
 .song-list {
   display: flex;
   flex-direction: column;
   padding: 8px 12px 24px;
+}
+
+.song-row-left-locked {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 8px 12px;
+  border-radius: var(--radius);
+  transition: background-color 0.15s ease;
+  opacity: 0.4;
+  pointer-events: none;
+  cursor: not-allowed;
 }
 
 .song-row-right {
@@ -133,6 +159,10 @@
 }
 
 .song-card {
+  display: flex;
+  justify-content: space-between;
+}
+.song-card-locked {
   display: flex;
   justify-content: space-between;
 }
@@ -196,6 +226,13 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+.selected-song-duration {
+  font-size: 16px;
+  color: #9aa0ab;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 
 .song-row-duration-text {
   font-size: 14px;
@@ -207,8 +244,7 @@
 
 .selected-song-header-content {
   padding: 8px;
-  border-top: 2px solid var(--color-border-faded-green);
-
+  background-color: var(--bg-card-dark);
   border-radius: var(--radius);
 }
 .home-right-header {
@@ -223,4 +259,21 @@
 .right-cover {
   width: 100%;
   border-radius: var(--radius);
+}
+
+.song-locked-text {
+  margin-top: 5px;
+  font-size: 14px;
+  color: #9aa0ab;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.upgrade-btn {
+  border: 2px solid var(--color-border);
+  border-radius: 8px;
+  font-size: 12px;
+  padding: 3px;
+  opacity: 1;
 }

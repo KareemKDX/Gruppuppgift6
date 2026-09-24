@@ -12,22 +12,26 @@ function HomePage() {
   const [selectedSong, setSelectedSong] = useState<Song | null>(null);
   const [loadingSong, setLoadingSong] = useState(false);
 
-  useEffect(() => {
-    async function fetchSongs() {
-      try {
-        const res = await api.get("/api/songs");
+  const [userHasEarlyAccess, setUserHasEarlyAccess] = useState(false);
 
-        const data = res.data;
-        console.log(data);
-        setSongs(data);
-      } catch (error) {
-        console.log(error);
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const [songsRes, profileRes] = await Promise.all([
+          api.get("/api/songs"),
+          api.get("/api/profile"),
+        ]);
+        setSongs(songsRes.data);
+        console.log(songsRes.data);
+        setUserHasEarlyAccess(profileRes.data.user.early_access === true);
+        console.log(profileRes.data.user);
+      } catch (err) {
+        console.log(err);
       } finally {
         setLoading(false);
       }
     }
-
-    fetchSongs();
+    fetchData();
   }, []);
 
   async function handleSongClick(id: number) {
@@ -35,7 +39,7 @@ function HomePage() {
     try {
       const res = await api.get(`/api/songs/${id}`);
       setSelectedSong(res.data);
-      console.log("handleSongClick called.");
+      console.log("handleSongClick() called.");
       console.log(res.data);
     } catch (err) {
       console.log(err);
@@ -71,37 +75,61 @@ function HomePage() {
             <button className="play-button" aria-label="Play all">
               ▶
             </button>
+            <button className="btn header-action-button">ALL</button>
+            <button className="btn header-action-button">RELEASED</button>
+            <button className="btn header-action-button">EARLY ACCESS</button>
           </div>
 
           <div className="song-list">
-            {songs.map((song, index) => (
-              <div
-                className="song-card"
-                key={song.id}
-                onClick={() => handleSongClick(song.id)}
-              >
-                <div className="song-row-right">
-                  <span className="song-index">{index + 1}</span>
+            {songs.map((song, index) => {
+              const isLocked =
+                song.release_type === "early_access" && !userHasEarlyAccess;
 
-                  <img
-                    src={song.image_url}
-                    alt={song.title}
-                    className="song-row-cover"
-                  />
+              return (
+                <div
+                  className={isLocked ? "song-card-locked" : "song-card"}
+                  key={song.id}
+                  onClick={() => handleSongClick(song.id)}
+                >
+                  <div
+                    className={
+                      isLocked ? "song-row-left-locked" : "song-row-right"
+                    }
+                  >
+                    <span className="song-index">{index + 1}</span>
 
-                  <div className="song-row-info">
-                    <span className="song-row-title">{song.title}</span>
-                    <span className="song-row-artist">{song.artist}</span>
+                    <img
+                      src={song.image_url}
+                      alt={song.title}
+                      className="song-row-cover"
+                    />
+
+                    <div className="song-row-info">
+                      <span className="song-row-title">{song.title}</span>
+                      <span className="song-row-artist">{song.artist}</span>
+                    </div>
+                  </div>
+
+                  <div className="song-row-right">
+                    {isLocked && (
+                      <div className="song-locked-text">
+                        <p>Early Access</p>
+                      </div>
+                    )}
+
+                    {isLocked ? (
+                      <Link to="/subscription" className="upgrade-btn">
+                        Upgrade
+                      </Link>
+                    ) : (
+                      <p className="song-row-duration-text">
+                        {songDurationToString(song.duration)}
+                      </p>
+                    )}
                   </div>
                 </div>
-
-                <div className="song-row-right">
-                  <p className="song-row-duration-text">
-                    {songDurationToString(song.duration)}
-                  </p>
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </div>
@@ -121,7 +149,9 @@ function HomePage() {
               <div className="selected-song-header-content">
                 <h2 className="selected-song-title">{selectedSong.title}</h2>
                 <p className="selected-song-artist">{selectedSong.artist}</p>
-                <p>{songDurationToString(selectedSong.duration)}</p>
+                <p className="selected-song-duration">
+                  Duration: {songDurationToString(selectedSong.duration)}
+                </p>
               </div>
             </div>
           </div>

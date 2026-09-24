@@ -7,4 +7,5 @@ export interface Song {
   created_at: string;
   image_url: string;
   duration: number;
+  release_type: string;
 }

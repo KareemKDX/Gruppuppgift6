@@ -29,13 +29,15 @@ export const getSongs = async (req: Request, res: Response) => {
   }
 };
 
+//FETCH SONG BY ID AND CHECK USER SUBSCRIPTION CONDITIONS
 export const getSongById = async (req: Request, res: Response) => {
   const { id } = req.params;
 
   try {
     const result = await pool.query("SELECT * FROM songs WHERE id = $1", [id]);
-
     const song = result.rows[0];
+    console.log("getSongById Called");
+    console.log("song.release value:", JSON.stringify(song.release_type));
 
     if (!song) {
       return res
@@ -43,10 +45,29 @@ export const getSongById = async (req: Request, res: Response) => {
         .json({ error: "Couldn't find song with id: " + id });
     }
 
+    if (song.release_type === "early_access") {
+      const userResult = await pool.query(
+        `SELECT subscriptions.early_access
+         FROM users
+         JOIN subscriptions ON users.subscription_id = subscriptions.id
+         WHERE users.id = $1`,
+        [req.user!.id],
+      );
+
+      const hasEarlyAccess = userResult.rows[0]?.early_access === true;
+      console.log("early access: " + hasEarlyAccess);
+
+      if (!hasEarlyAccess) {
+        return res
+          .status(403)
+          .json({ error: "User doesn't have early access subscription." });
+      }
+    }
+
     res.json(song);
   } catch (error) {
     console.log(error);
-    res.status(500).json({ error: "Kunde inte hämta låten" });
+    res.status(500).json({ error: "Error fetching song" });
   }
 };
 

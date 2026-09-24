@@ -11,6 +11,7 @@ import {
 } from "./routes/song-routes";
 import profileRouter from "./routes/profile-routes";
 import subscriptionRouter from "./routes/subscription-routes";
+import { authenticateToken } from "./middleware/auth";
 
 let app = express();
 
@@ -24,7 +25,7 @@ app.use("/api", subscriptionRouter);
 
 app.get("/api/songs", getSongs);
 app.post("/api/songs", addSong);
-app.get("/api/songs/:id", getSongById);
+app.get("/api/songs/:id", authenticateToken, getSongById);
 app.patch("/api/songs/:id", updateReleaseType);
 
 app.get("/test", async (req, res) => {
