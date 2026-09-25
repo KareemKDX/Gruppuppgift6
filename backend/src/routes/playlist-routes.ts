@@ -57,6 +57,35 @@ router.post("/playlists", authenticateToken, async (req, res) => {
   res.status(201).json({ playlist: { ...result.rows[0], song_count: 0 } });
 });
 
+router.get("/playlists/:id", authenticateToken, async (req, res) => {
+  const playlist = await findPlaylist(req.params.id, req.user!.id);
+
+  if (!playlist) {
+    return res.status(404).json({ message: "Playlist not found" });
+  }
+
+  const songs = await pool.query(
+    `SELECT songs.* FROM playlist_songs JOIN songs ON songs.id = playlist_songs.song_id
+     WHERE playlist_songs.playlist_id = $1 ORDER BY songs.artist, songs.title`,
+    [playlist.id]
+  );
+
+  res.json({ playlist: { ...playlist, songs: songs.rows } });
+});
+
+router.delete("/playlists/:id", authenticateToken, async (req, res) => {
+  const result = await pool.query(
+    "DELETE FROM playlists WHERE id = $1 AND user_id = $2",
+    [toId(req.params.id), req.user!.id]
+  );
+
+  if (result.rowCount === 0) {
+    return res.status(404).json({ message: "Playlist not found" });
+  }
+
+  res.sendStatus(204);
+});
+
 router.post("/playlists/:id/songs", authenticateToken, async (req, res) => {
   const songId = toId(req.body?.song_id);
 
