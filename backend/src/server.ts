@@ -37,8 +37,6 @@ app.get("/api/content-pages", getContentPages);
 app.post("/api/content-pages", authenticateToken, requireAdmin, addContentPage);
 app.post("/api/checkout", authenticateToken, createCheckout);
 app.get("/api/receipts", authenticateToken, getReceipts);
-app.post("/api/songs", addSong);
-app.patch("/api/songs/:id", updateReleaseType);
 
 app.get("/test", async (req, res) => {
   const result = await pool.query("Select * from Subscriptions");
