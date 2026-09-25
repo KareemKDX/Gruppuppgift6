@@ -14,6 +14,7 @@ import {
 import { getContentPages, addContentPage } from "./routes/content-routes";
 import profileRouter from "./routes/profile-routes";
 import subscriptionRouter from "./routes/subscription-routes";
+import playlistRouter from "./routes/playlist-routes";
 
 let app = express();
 
@@ -25,6 +26,7 @@ app.use("/auth", authRouter);
 //User
 app.use("/api", profileRouter);
 app.use("/api", subscriptionRouter);
+app.use("/api", playlistRouter);
 app.get("/api/songs/:id", authenticateToken, getSongById);
 
 app.get("/api/songs", getSongs);
