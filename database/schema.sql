@@ -8,7 +8,7 @@ CREATE TABLE subscriptions (
     name VARCHAR(50) NOT NULL,
     playlist_limit INTEGER NOT NULL,
     early_access BOOLEAN NOT NULL,
-    price DECIMAL(10.2) NOT NULL
+    price DECIMAL(10,2) NOT NULL
 );
 
 CREATE TABLE users (
@@ -92,10 +92,10 @@ CREATE TABLE content_pages (
         REFERENCES subscriptions(id)
 );
 
-INSERT INTO subscriptions (name, playlist_limit, early_access)
+INSERT INTO subscriptions (name, playlist_limit, early_access, price)
 VALUES
-    ('Basic', 0, FALSE),
-    ('Plus', 5, FALSE),
-    ('Premium', 10, TRUE);
+    ('Basic', 0, FALSE, 0),
+    ('Plus', 5, FALSE, 79),
+    ('Premium', 10, TRUE, 129);
 
 

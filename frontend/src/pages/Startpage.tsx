@@ -11,11 +11,11 @@ function Startpage() {
   useEffect(() => {
     async function fetchSongs() {
       try {
-        const res = await api.get("/api/songs");
+        const res = await api.get<Song[]>("/api/songs");
 
         const data = res.data;
         console.log(data);
-        setSongs(data.slice(0, 4));
+        setSongs(data.slice(0, 6));
       } catch (error) {
         console.log(error);
       } finally {

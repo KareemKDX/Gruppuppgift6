@@ -2,29 +2,17 @@ import { useState, useEffect } from "react";
 import api from "../lib/api";
 import "../css/ProfilePage.css";
 import { Link } from "react-router-dom";
-
-type Profile = {
-  id: number;
-  username: string;
-  email: string;
-  role: string;
-  created_at: string;
-  subscription_id: number | null;
-  playlist_limit: number | null;
-  early_access: number | null;
-  subscription_name: string | null;
-  price: number | null;
-};
+import { type UserProfile } from "../types/UserProfile";
 
 function ProfilePage() {
-  const [profile, setProfile] = useState<Profile | null>(null);
+  const [profile, setProfile] = useState<UserProfile | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
   useEffect(() => {
     async function fetchProfile() {
       try {
-        const res = await api.get("/api/profile");
+        const res = await api.get<{ user: UserProfile }>("/api/profile");
         setProfile(res.data.user);
         console.log(res.data.user);
       } catch (err) {
