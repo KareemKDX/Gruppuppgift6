@@ -6,7 +6,9 @@ const router = Router();
 
 const toId = (value: unknown) => {
   const id = Number(value);
-  return Number.isInteger(id) && id > 0 ? id : null;
+  // 2147483647 is the max value for INTEGER in postgres.
+  // without this check bigger ids make the query throw and the route returns 500.
+  return Number.isInteger(id) && id > 0 && id <= 2147483647 ? id : null;
 };
 
 const findPlaylist = async (rawId: unknown, userId: number) => {
