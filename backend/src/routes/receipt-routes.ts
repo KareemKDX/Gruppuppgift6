@@ -49,3 +49,25 @@ export async function createCheckout(req: Request, res: Response) {
     res.status(500).json({ error: "Kunde inte slutföra köpet" });
   }
 }
+
+// hämtar den inloggade användarens egna kvitton
+export async function getReceipts(req: Request, res: Response) {
+  const userId = req.user?.id;
+
+  try {
+    // hämtar även paketets namn så kvittot går att läsa utan extra anrop
+    const result = await pool.query(
+      `SELECT receipts.id, receipts.amount, receipts.payment_date, subscriptions.name AS subscription_name
+       FROM receipts
+       JOIN subscriptions ON subscriptions.id = receipts.subscription_id
+       WHERE receipts.user_id = $1
+       ORDER BY receipts.payment_date DESC`,
+      [userId]
+    );
+
+    res.json({ receipts: result.rows });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Kunde inte hämta kvitton" });
+  }
+}

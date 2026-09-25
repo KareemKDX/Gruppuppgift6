@@ -12,7 +12,7 @@ import {
   getSongById,
 } from "./routes/song-routes";
 import { getContentPages, addContentPage } from "./routes/content-routes";
-import { createCheckout } from "./routes/receipt-routes";
+import { createCheckout, getReceipts } from "./routes/receipt-routes";
 import profileRouter from "./routes/profile-routes";
 import subscriptionRouter from "./routes/subscription-routes";
 import playlistRouter from "./routes/playlist-routes";
@@ -36,6 +36,7 @@ app.patch("/api/songs/:id", authenticateToken, requireAdmin, updateReleaseType);
 app.get("/api/content-pages", getContentPages);
 app.post("/api/content-pages", authenticateToken, requireAdmin, addContentPage);
 app.post("/api/checkout", authenticateToken, createCheckout);
+app.get("/api/receipts", authenticateToken, getReceipts);
 app.post("/api/songs", addSong);
 app.patch("/api/songs/:id", updateReleaseType);
 
