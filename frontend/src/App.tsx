@@ -13,6 +13,7 @@ import AdminPage from "./pages/AdminPage.tsx";
 import HomePage from "./pages/HomePage.tsx";
 import ProfilePage from "./pages/ProfilePage.tsx";
 import SubscriptionPage from "./pages/SubscriptionPage.tsx";
+import CheckoutPage from "./pages/CheckoutPage.tsx";
 import ReceiptsPage from "./pages/ReceiptsPage.tsx";
 
 function App() {
@@ -68,6 +69,7 @@ function App() {
               <Route path="/" element={<HomePage />} />
               <Route path="/profile" element={<ProfilePage />} />
               <Route path="/subscription" element={<SubscriptionPage />} />
+              <Route path="/checkout" element={<CheckoutPage />} />
               <Route path="/receipts" element={<ReceiptsPage />} />
               <Route path="/Admin" element={<AdminPage />} />
             </Routes>
