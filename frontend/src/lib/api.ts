@@ -15,3 +15,5 @@ api.interceptors.request.use((config) => {
 });
 
 export default api;
+
+export const PLAYLISTS_CHANGED = "playlists-changed";
