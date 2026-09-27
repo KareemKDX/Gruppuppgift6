@@ -18,7 +18,7 @@ function CheckoutPage() {
   const [error, setError] = useState("");
   const [paying, setPaying] = useState(false);
 
-  // kortuppgifterna sparas aldrig de finns bara för att steget ska kännas riktigt
+  // kortuppgifterna sparas aldrig och finns bara för att steget ska kännas riktigt
   const [cardName, setCardName] = useState("");
   const [cardNumber, setCardNumber] = useState("");
   const [expiry, setExpiry] = useState("");
@@ -57,7 +57,7 @@ function CheckoutPage() {
     setError("");
 
     try {
-      // bara paketets id skickas, priset bestämmer servern
+      // bara paketets id skickas och priset bestämmer servern
       await api.post("/api/checkout", { subscription_id: subscriptionId });
       navigate("/receipts");
     } catch (err) {
@@ -84,13 +84,14 @@ function CheckoutPage() {
         <span className="checkout-price">{subscription.price} kr</span>
       </div>
 
-      <form className="checkout-form" onSubmit={handleSubmit}>
+      <form className="checkout-form" onSubmit={handleSubmit} autoComplete="off">
         <label htmlFor="card-name">Name on card</label>
         <input
           id="card-name"
           value={cardName}
           onChange={(event) => setCardName(event.target.value)}
           placeholder="Anna Andersson"
+          autoComplete="off"
           required
         />
 
@@ -100,6 +101,7 @@ function CheckoutPage() {
           value={cardNumber}
           onChange={(event) => setCardNumber(event.target.value)}
           placeholder="4242 4242 4242 4242"
+          autoComplete="off"
           required
         />
 
@@ -111,6 +113,7 @@ function CheckoutPage() {
               value={expiry}
               onChange={(event) => setExpiry(event.target.value)}
               placeholder="12/29"
+              autoComplete="off"
               required
             />
           </div>
@@ -122,6 +125,7 @@ function CheckoutPage() {
               value={cvc}
               onChange={(event) => setCvc(event.target.value)}
               placeholder="123"
+              autoComplete="off"
               required
             />
           </div>
