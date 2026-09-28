@@ -15,6 +15,7 @@ import ProfilePage from "./pages/ProfilePage.tsx";
 import SubscriptionPage from "./pages/SubscriptionPage.tsx";
 import CheckoutPage from "./pages/CheckoutPage.tsx";
 import ReceiptsPage from "./pages/ReceiptsPage.tsx";
+import PlaylistPage from "./pages/PlaylistPage.tsx";
 
 function App() {
   const [user, setUser] = useState<User | null>(null);
@@ -53,7 +54,7 @@ function App() {
       <div className="app">
         <Navbar user={user} onLogout={handleLogout} />
 
-        <Sidebar />
+        <Sidebar loggedIn={user !== null} />
 
         <div className="main">
           {!user ? (
@@ -71,6 +72,7 @@ function App() {
               <Route path="/subscription" element={<SubscriptionPage />} />
               <Route path="/checkout" element={<CheckoutPage />} />
               <Route path="/receipts" element={<ReceiptsPage />} />
+              <Route path="/playlists/:id" element={<PlaylistPage />} />
               <Route path="/Admin" element={<AdminPage />} />
             </Routes>
           )}
