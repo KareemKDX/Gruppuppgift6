@@ -111,10 +111,18 @@ function HomePage() {
             {filteredSongs.map((song, index) => {
               const isLocked =
                 song.release_type === "early_access" && !userHasEarlyAccess;
+              const hasEarlyAccess =
+                song.release_type === "early_access" && userHasEarlyAccess;
 
               return (
                 <div
-                  className={isLocked ? "song-card-locked" : "song-card"}
+                  className={
+                    isLocked
+                      ? "song-card-locked"
+                      : hasEarlyAccess
+                        ? "song-card-early-access"
+                        : "song-card"
+                  }
                   key={song.id}
                   onClick={() => handleSongClick(song.id)}
                 >
@@ -140,10 +148,12 @@ function HomePage() {
                   <div className="song-row-right">
                     {isLocked && (
                       <div className="song-locked-text">
-                        <p>Early Access</p>
+                        <p className="song-locked-text">Early access</p>
                       </div>
                     )}
-
+                    {hasEarlyAccess && (
+                      <p className="capital-style-text">EARLY ACCESS</p>
+                    )}
                     {isLocked ? (
                       <Link to="/subscription" className="upgrade-btn">
                         Upgrade
