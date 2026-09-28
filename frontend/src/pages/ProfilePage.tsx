@@ -38,44 +38,49 @@ function ProfilePage() {
     <div className="profile-wrapper">
       <h1>My Profile</h1>
 
-      <div className="profile-container">
-        <div className="profile-card subscription-box">
-          <div className="subscription-box-content">
-            <div>
-              <span className="profile-label">Current subscription plan</span>
-              <br></br>
-              <h2 className="subscription-color-text">
-                {profile.subscription_name ?? "None"}
-              </h2>
-              <p>Montly cost: {profile.price} kr</p>
-              <div className="subscription-items">
-                <h4>Included in my plan:</h4>
-                <p>My playlist limit: {profile.playlist_limit}</p>
-                <p>Early access: {profile.early_access ? "Yes" : "No"}</p>
+      <div className="profile-outer-container">
+        <div className="profile-container">
+          <div className="profile-card subscription-box">
+            <div className="subscription-box-content">
+              <div>
+                <span className="profile-label">Current subscription plan</span>
+                <br></br>
+                <h2 className="subscription-color-text">
+                  {profile.subscription_name ?? "None"}
+                </h2>
+                <p>Montly cost: {profile.price} kr</p>
+                <div className="subscription-items">
+                  <h4>Included in my plan:</h4>
+                  <p>My playlist limit: {profile.playlist_limit}</p>
+                  <p>Early access: {profile.early_access ? "Yes" : "No"}</p>
+                </div>
               </div>
+              <Link to="/subscription" className="change-subscription-button">
+                Change Plan ›
+              </Link>
             </div>
-            <Link to="/subscription" className="change-subscription-button">
-              Change Plan ›
-            </Link>
+          </div>
+
+          <div className="profile-right-content">
+            <div className="profile-card subscription-box">
+              <span className="profile-label">Username: </span>
+              <span>{profile.username}</span>
+            </div>
+
+            <div className="profile-card subscription-box">
+              <span className="profile-label">Email: </span>
+              <span>{profile.email}</span>
+            </div>
+
+            <div className="profile-card subscription-box">
+              <span className="profile-label">Member since: </span>
+              <span>{new Date(profile.created_at).toLocaleDateString()}</span>
+            </div>
           </div>
         </div>
-
-        <div className="profile-right-content">
-          <div className="profile-card subscription-box">
-            <span className="profile-label">Username: </span>
-            <span>{profile.username}</span>
-          </div>
-
-          <div className="profile-card subscription-box">
-            <span className="profile-label">Email: </span>
-            <span>{profile.email}</span>
-          </div>
-
-          <div className="profile-card subscription-box">
-            <span className="profile-label">Member since: </span>
-            <span>{new Date(profile.created_at).toLocaleDateString()}</span>
-          </div>
-        </div>
+        <Link to="/receipts" className="profile-card profile-items">
+          Order history ›
+        </Link>
       </div>
     </div>
   );
