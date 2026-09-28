@@ -16,6 +16,7 @@ import SubscriptionPage from "./pages/SubscriptionPage.tsx";
 import CheckoutPage from "./pages/CheckoutPage.tsx";
 import ReceiptsPage from "./pages/ReceiptsPage.tsx";
 import PlaylistPage from "./pages/PlaylistPage.tsx";
+import PlaylistEditPage from "./pages/PlaylistEditPage.tsx";
 
 function App() {
   const [user, setUser] = useState<User | null>(null);
@@ -73,6 +74,10 @@ function App() {
               <Route path="/checkout" element={<CheckoutPage />} />
               <Route path="/receipts" element={<ReceiptsPage />} />
               <Route path="/playlists/:id" element={<PlaylistPage />} />
+              <Route
+                path="/playlists/:id/edit"
+                element={<PlaylistEditPage />}
+              />
               <Route path="/Admin" element={<AdminPage />} />
             </Routes>
           )}

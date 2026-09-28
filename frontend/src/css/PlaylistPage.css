@@ -33,3 +33,14 @@
   padding: 8px 12px;
   color: var(--text-secondary);
 }
+
+.edit-playlist-button {
+  margin-top: 15px;
+  border-radius: var(--radius);
+  background-color: rgba(255, 255, 255, 0.06);
+  border: none;
+  color: #e8eaed;
+  font-size: 13px;
+  padding: 5px;
+  letter-spacing: 1px;
+}

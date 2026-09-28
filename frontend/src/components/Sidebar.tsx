@@ -1,5 +1,5 @@
 import { useEffect, useState, type FormEvent } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
 import api, { PLAYLISTS_CHANGED } from "../lib/api";
 import "../css/Sidebar.css";
@@ -24,7 +24,10 @@ function Sidebar({ loggedIn }: { loggedIn: boolean }) {
     }
 
     const loadPlaylists = () => {
-      api.get("/api/playlists").then((res) => setPlaylists(res.data.playlists)).catch((err) => console.log(err));
+      api
+        .get("/api/playlists")
+        .then((res) => setPlaylists(res.data.playlists))
+        .catch((err) => console.log(err));
     };
 
     loadPlaylists();
@@ -98,7 +101,7 @@ function Sidebar({ loggedIn }: { loggedIn: boolean }) {
 
               <div className="sidebar-item-container">
                 {playlists.map((playlist) => (
-                  <Link
+                  <NavLink
                     to={`/playlists/${playlist.id}`}
                     className="sidebar-playlist-card"
                     key={playlist.id}
@@ -111,7 +114,7 @@ function Sidebar({ loggedIn }: { loggedIn: boolean }) {
                         {playlist.song_count} tracks
                       </div>
                     </div>
-                  </Link>
+                  </NavLink>
                 ))}
               </div>
             </>
