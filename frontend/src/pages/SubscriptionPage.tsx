@@ -14,15 +14,22 @@ type Subscription = {
 
 function SubscriptionPage() {
   const [subscriptions, setSubscriptions] = useState<Subscription[]>([]);
+  const [currentSubscriptionId, setCurrentSubscriptionId] = useState<
+    number | null
+  >(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
-    async function fetchSubscriptions() {
+    async function fetchData() {
       try {
-        const res = await api.get("/api/subscriptions");
-        setSubscriptions(res.data.subscriptions);
+        const [subsRes, profileRes] = await Promise.all([
+          api.get("/api/subscriptions"),
+          api.get("/api/profile"),
+        ]);
+        setSubscriptions(subsRes.data.subscriptions);
+        setCurrentSubscriptionId(profileRes.data.user.subscription_id);
       } catch (err) {
         console.log(err);
         setError("Error fetching subscriptions");
@@ -31,7 +38,7 @@ function SubscriptionPage() {
       }
     }
 
-    fetchSubscriptions();
+    fetchData();
   }, []);
 
   function handleSelect(id: number) {
@@ -48,34 +55,55 @@ function SubscriptionPage() {
 
   return (
     <div className="profile-wrapper">
-      <h1>Choose your plan</h1>
+      <div className="subscription-header">
+        <h1 className="subscription-page-title">Choose your plan</h1>
+        <p className="subscription-page-subtitle">
+          Upgrade anytime to unlock early access and more playlists.
+        </p>
+      </div>
 
       <div className="subscriptions-grid">
-        {subscriptions.map((subscription) => (
-          <div
-            className="profile-card subscription-plan-card"
-            key={subscription.id}
-          >
-            <span className="profile-label">{subscription.name}</span>
-            <h2 className="subscription-color-text">
-              {subscription.price} kr / month
-            </h2>
+        {subscriptions.map((subscription) => {
+          const isCurrent = subscription.id === currentSubscriptionId;
 
-            <div className="subscription-items">
-              <p>
-                Playlist limit: {subscription.playlist_limit ?? "Unlimited"}
-              </p>
-              <p>Early access: {subscription.early_access ? "Yes" : "No"}</p>
-            </div>
-
-            <button
-              className="change-subscription-button"
-              onClick={() => handleSelect(subscription.id)}
+          return (
+            <div
+              className={
+                !isCurrent
+                  ? "subscription-plan-card"
+                  : "subscription-plan-card-current"
+              }
+              key={subscription.id}
             >
-              Select plan
-            </button>
-          </div>
-        ))}
+              {isCurrent && <h4 className="current-text">Current plan</h4>}
+              <span className="subscription-label">{subscription.name}</span>
+
+              {subscription.name === "Basic" ? (
+                <h3 className="subscription-color-text">Free</h3>
+              ) : (
+                <h3 className="subscription-color-text">
+                  {subscription.price} kr / month
+                </h3>
+              )}
+
+              <div className="subscription-items">
+                <p>
+                  Playlist limit: {subscription.playlist_limit ?? "Unlimited"}
+                </p>
+                <p>Early access: {subscription.early_access ? "Yes" : "No"}</p>
+              </div>
+
+              {!isCurrent && (
+                <button
+                  className="change-subscription-button"
+                  onClick={() => handleSelect(subscription.id)}
+                >
+                  SELECT PLAN
+                </button>
+              )}
+            </div>
+          );
+        })}
       </div>
     </div>
   );
