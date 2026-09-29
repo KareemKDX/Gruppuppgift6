@@ -5,7 +5,6 @@
 }
 
 .subscriptions-grid {
-  width: 600px;
   gap: 1rem;
 }
 
@@ -68,10 +67,4 @@
 
 .subscription-page-subtitle {
   margin-top: 10px;
-}
-
-@media (max-width: 768px) {
-  .subscriptions-grid {
-    width: 300px;
-  }
 }

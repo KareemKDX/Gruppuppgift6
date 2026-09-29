@@ -63,7 +63,7 @@ function ProfilePage() {
             </div>
           </div>
 
-          <div className="profile-right-content">
+          <div className="profile-right-content no-pointer">
             <div className="profile-card">
               <span className="profile-label">Username: </span>
               <span>{profile.username}</span>

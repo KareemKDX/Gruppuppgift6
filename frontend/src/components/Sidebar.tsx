@@ -82,7 +82,7 @@ function Sidebar({ loggedIn }: { loggedIn: boolean }) {
                     required
                     autoFocus
                   />
-                  <button type="submit" className="btn">
+                  <button type="submit" className="btn create-playlist-btn">
                     Create
                   </button>
                 </form>

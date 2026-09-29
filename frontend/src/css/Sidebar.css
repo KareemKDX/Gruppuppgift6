@@ -11,18 +11,23 @@
   justify-content: space-between;
   flex-direction: row;
   padding: 10px;
+  background-color: black;
+  border-radius: var(--radius);
 }
 
 .sidebar-add-playlist {
-  display: flex;
   width: 28px;
   height: 28px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 2px solid white;
+  border: 3px solid var(--bg-card-hover);
   border-radius: var(--radius);
   cursor: pointer;
+  margin-left: 10px;
+}
+.sidebar-add-playlist:hover {
+  transform: scale(1.15);
 }
 
 .sidebar-add-playlist h4 {
@@ -45,18 +50,27 @@
   width: 100%;
   align-items: center;
   justify-content: center;
-  background-color: var(--text-secondary);
+  background-color: var(--bg-card);
+  color: var(--text-primary);
+  border-radius: var(--radius);
   color: black;
   border-radius: var(--radius);
   aspect-ratio: 1 / 1;
   max-width: 90px;
+  min-width: 70px;
+  padding: 6px;
 }
+.sidebar-playlist-card:hover {
+  background-color: var(--bg-card-hover);
+}
+
 .playlist-info {
   color: var(--text-primary);
 }
 .playlist-header {
   display: flex;
   justify-content: center;
+
   align-items: center;
 }
 
@@ -103,8 +117,9 @@ button.sidebar-add-playlist {
 .sidebar-create-form {
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  padding: 0 10px;
+  gap: 10px;
+  margin-top: 10px;
+  width: 100%;
 }
 
 .sidebar-create-form input {
@@ -128,16 +143,32 @@ button.sidebar-add-playlist {
 }
 
 .playlist-header h4 {
-  padding: 4px;
+  color: var(--text-primary);
+  padding: 0;
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
   text-align: center;
   overflow-wrap: anywhere;
+  line-height: 1.2;
+}
+.playlist-song-amount {
+  font-size: 14px;
+}
+.active {
+  border: 2px solid gainsboro;
 }
 
+.create-playlist-btn {
+  padding: 5px;
+  background-color: var(--text-primary);
+}
 
 /*SMALLER SCREENS. MAKE SIDEBAR CONTENT FILL IN ROW*/
-@media (max-width: 768px) {
+/*ADJUSTS SCROLL ETC FOR SMALLER SCREENS*/
+@media (max-width: 960px) {
   .sidebar-wrapper {
-    height: 100%; 
+    height: 100%;
     display: flex;
     align-items: center;
   }
@@ -145,8 +176,37 @@ button.sidebar-add-playlist {
   .sidebar-item-container {
     flex-direction: row;
     align-items: center;
-    padding: 8px 12px; 
+    padding: 8px 12px;
     gap: 1rem;
     overflow-x: auto;
+  }
+  .sidebar {
+    overflow-y: hidden;
+    overflow-x: hidden;
+  }
+
+  .sidebar-wrapper {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  .sidebar-item-container {
+    flex-direction: row;
+    align-items: center;
+
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch; /* SMOOTHER SCROLL FOR IOS (IPHONE ETC) */
+    scrollbar-width: none; /* REMOVE SCROLL FROM FIREFOX */
+  }
+
+  .sidebar-item-container::-webkit-scrollbar {
+    display: none; /* HIDE SCROLLWHEEL FROM WEBBROWSERS ON SMALLER SCREENS */
+  }
+
+  .sidebar-create-form {
+    margin-left: 10px;
   }
 }
