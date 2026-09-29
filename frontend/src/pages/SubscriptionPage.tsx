@@ -54,7 +54,7 @@ function SubscriptionPage() {
   }
 
   return (
-    <div className="profile-wrapper">
+    <div className="profile-page">
       <div className="page-header">
         <h1>Choose your plan</h1>
         <p>Upgrade anytime to unlock early access and more playlists.</p>

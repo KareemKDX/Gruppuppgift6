@@ -1,13 +1,10 @@
-.profile-wrapper {
-  display: flex;
-  margin-top: 100px;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
-  min-height: 100%;
+.profile-page {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
 }
 
-.profile-card {
+.profile-left-content {
   background-color: var(--bg-card);
   border-radius: var(--radius);
   padding: 12px;
@@ -17,18 +14,27 @@
   flex: 2;
 }
 
+.profile-card {
+  background-color: var(--bg-card);
+  border-radius: var(--radius);
+  padding: 12px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  gap: 1rem;
+  flex: 1;
+}
+
 .profile-container {
   display: flex;
-
-  gap: 10px;
-  width: 800px;
   flex-wrap: wrap;
+  gap: 10px;
 }
 
 .profile-outer-container {
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  margin-top: 50px;
 }
 .profile-right-content {
   display: flex;
@@ -41,10 +47,6 @@
   display: flex;
   justify-content: center;
   text-align: center;
-}
-
-.subscription-box {
-  width: 300px;
 }
 
 .profile-label {

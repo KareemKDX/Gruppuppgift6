@@ -1,7 +1,11 @@
+.subscription-page {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
 .subscriptions-grid {
-  display: flex;
-  flex-direction: column;
-  width: 500px;
+  width: 600px;
   gap: 1rem;
 }
 
@@ -10,6 +14,7 @@
   padding: 14px;
   border-radius: var(--radius);
   border: 1px solid var(--bg-card);
+  margin: 15px;
 }
 
 .subscription-plan-card-current {
@@ -63,4 +68,10 @@
 
 .subscription-page-subtitle {
   margin-top: 10px;
+}
+
+@media (max-width: 768px) {
+  .subscriptions-grid {
+    width: 300px;
+  }
 }

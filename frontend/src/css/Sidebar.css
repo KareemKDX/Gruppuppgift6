@@ -132,3 +132,21 @@ button.sidebar-add-playlist {
   text-align: center;
   overflow-wrap: anywhere;
 }
+
+
+/*SMALLER SCREENS. MAKE SIDEBAR CONTENT FILL IN ROW*/
+@media (max-width: 768px) {
+  .sidebar-wrapper {
+    height: 100%; 
+    display: flex;
+    align-items: center;
+  }
+
+  .sidebar-item-container {
+    flex-direction: row;
+    align-items: center;
+    padding: 8px 12px; 
+    gap: 1rem;
+    overflow-x: auto;
+  }
+}

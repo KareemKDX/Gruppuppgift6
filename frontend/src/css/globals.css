@@ -39,7 +39,7 @@ a {
   color: inherit;
 }
 
-/*PAGE LAYOUT (NAVBAR, SIDEBAR, MAIN*/
+/*PAGE LAYOUT FOR PC (BIG (NAVBAR, SIDEBAR, MAIN*/
 .app {
   display: grid;
   grid-template-columns: var(--sidebar-width) 1fr;
@@ -52,27 +52,6 @@ a {
   margin: 0 auto;
 }
 
-@media (max-width: 768px) {
-  .app {
-    grid-template-columns: 1fr;
-    grid-template-rows: var(--navbar-height) 1fr 64px;
-    grid-template-areas:
-      "navbar"
-      "main"
-      "sidebar";
-  }
-
-  .sidebar {
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-around;
-    margin: 0;
-    padding: 8px;
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
-    overflow-x: auto;
-    overflow-y: hidden;
-  }
-}
 .main {
   grid-area: main;
 
@@ -101,6 +80,24 @@ a {
   overflow-y: auto;
   margin-right: 10px;
   margin-left: 10px;
+}
+
+/*PAGE LAYOUT FOR SMALLER SCREENS*/
+@media (max-width: 768px) {
+  .app {
+    grid-template-columns: 1fr;
+    grid-template-rows: var(--navbar-height) 95px 1fr;
+    grid-template-areas:
+      "navbar"
+      "sidebar"
+      "main";
+  }
+  .sidebar {
+    justify-content: center;
+  }
+  .main {
+    margin-top: 10px;
+  }
 }
 
 .navbar-user {

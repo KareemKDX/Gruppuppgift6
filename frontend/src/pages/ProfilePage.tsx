@@ -35,12 +35,14 @@ function ProfilePage() {
   }
 
   return (
-    <div className="profile-wrapper">
-      <h1>My Profile</h1>
-
+    <div className="profile-page">
+      <div className="page-header">
+        <h1>My profile</h1>
+        <p>Manage your account, subscription, and membership details.</p>
+      </div>
       <div className="profile-outer-container">
         <div className="profile-container">
-          <div className="profile-card subscription-box">
+          <div className="profile-left-content">
             <div className="subscription-box-content">
               <div>
                 <span className="profile-label">Current subscription plan</span>
@@ -62,17 +64,17 @@ function ProfilePage() {
           </div>
 
           <div className="profile-right-content">
-            <div className="profile-card subscription-box">
+            <div className="profile-card">
               <span className="profile-label">Username: </span>
               <span>{profile.username}</span>
             </div>
 
-            <div className="profile-card subscription-box">
+            <div className="profile-card">
               <span className="profile-label">Email: </span>
               <span>{profile.email}</span>
             </div>
 
-            <div className="profile-card subscription-box">
+            <div className="profile-card">
               <span className="profile-label">Member since: </span>
               <span>{new Date(profile.created_at).toLocaleDateString()}</span>
             </div>
