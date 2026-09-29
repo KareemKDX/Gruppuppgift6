@@ -1,6 +1,7 @@
 import axios from "axios";
 
-export const API_URL = "http://localhost:4001";
+// adressen till backend kommer från miljön när sidan är deployad
+export const API_URL = import.meta.env.VITE_API_URL || "http://localhost:4001";
 
 const TOKEN_KEY = "musicplate_token";
 
