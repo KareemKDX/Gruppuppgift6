@@ -31,7 +31,7 @@ function Startpage() {
   }
 
   return (
-    <div className="showcase-container">
+    <div className="showcase-container main-bg-light">
       <div className="startpage-intro">
         <p className="showcase-header">
           Explore & listen to songs created around the world...

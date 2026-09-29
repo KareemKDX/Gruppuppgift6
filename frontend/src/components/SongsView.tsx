@@ -113,7 +113,7 @@ function SongsView({
                 >
                   <div
                     className={
-                      isLocked ? "song-row-left-locked" : "song-row-right"
+                      isLocked ? "song-row-left-locked" : "song-row-left"
                     }
                   >
                     <span className="song-index">{index + 1}</span>

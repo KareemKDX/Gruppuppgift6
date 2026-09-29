@@ -51,13 +51,40 @@ a {
   max-width: 1680px;
   margin: 0 auto;
 }
+
+@media (max-width: 768px) {
+  .app {
+    grid-template-columns: 1fr;
+    grid-template-rows: var(--navbar-height) 1fr 64px;
+    grid-template-areas:
+      "navbar"
+      "main"
+      "sidebar";
+  }
+
+  .sidebar {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    margin: 0;
+    padding: 8px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+}
 .main {
   grid-area: main;
 
   overflow-y: auto;
-
   border-radius: var(--radius);
+  scrollbar-width: thin;
+  scrollbar-color: #4a4a4a transparent;
 }
+.main-bg-light {
+  background: linear-gradient(180deg, #2a2a2a 0%, var(--bg-main) 300px);
+}
+
 .navbar {
   display: flex;
   grid-area: navbar;
