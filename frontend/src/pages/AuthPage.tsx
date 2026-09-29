@@ -1,22 +1,33 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { API_URL, setToken } from "../auth";
 import type { User } from "../auth";
 import "../css/AuthPage.css";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 type Props = {
   onLoggedIn: (user: User) => void;
 };
 
 function AuthPage({ onLoggedIn }: Props) {
-  const [mode, setMode] = useState<"login" | "register">("login");
+  const location = useLocation();
+
+  // adressen avgör om formuläret öppnas för inloggning eller nytt konto
+  const [mode, setMode] = useState<"login" | "register">(
+    location.pathname === "/register" ? "register" : "login",
+  );
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
   const navigate = useNavigate();
+
+  // sidan byggs inte om när man går mellan login och register så vi ställer om läget här
+  useEffect(() => {
+    setMode(location.pathname === "/register" ? "register" : "login");
+    setError("");
+  }, [location.pathname]);
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
