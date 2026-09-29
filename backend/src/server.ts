@@ -19,7 +19,13 @@ import playlistRouter from "./routes/playlist-routes";
 
 let app = express();
 
-app.use(cors());
+// adressen till frontend kommer från miljön när sidan är deployad
+const frontendUrl = process.env.FRONTEND_URL || "http://localhost:5173";
+
+// porten sätts av servern vi kör på annars kör vi 4001 lokalt
+const port = Number(process.env.PORT) || 4001;
+
+app.use(cors({ origin: frontendUrl }));
 app.use(express.json());
 
 app.use("/auth", authRouter);
@@ -47,6 +53,6 @@ app.get("/", (req, res) => {
   res.json({ message: "MusicPlate backend is running!" });
 });
 
-app.listen(4001, () => {
-  console.log("MusicPlate backend started on port 4001");
+app.listen(port, () => {
+  console.log(`MusicPlate backend started on port ${port}`);
 });
