@@ -83,7 +83,10 @@ function App() {
                 path="/playlists/:id/edit"
                 element={<PlaylistEditPage />}
               />
-              <Route path="/Admin" element={<AdminPage />} />
+              {/* adminsidan finns bara för den som är admin */}
+              {user.role === "admin" && (
+                <Route path="/Admin" element={<AdminPage />} />
+              )}
             </Routes>
           )}
         </div>
