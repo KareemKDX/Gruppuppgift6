@@ -65,6 +65,11 @@ function App() {
                 path="/login"
                 element={<AuthPage onLoggedIn={setUser} />}
               />
+              {/* samma sida som login men startar i läget för nytt konto */}
+              <Route
+                path="/register"
+                element={<AuthPage onLoggedIn={setUser} />}
+              />
             </Routes>
           ) : (
             <Routes>
