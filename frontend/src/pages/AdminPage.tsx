@@ -22,7 +22,6 @@ type Subscription = {
 type ContentPage = {
   id: number;
   title: string;
-  content: string;
   required_subscription_id: number;
 };
 
@@ -245,8 +244,6 @@ function AdminPage() {
                 Kräver {getLevelName(page.required_subscription_id)}
               </span>
             </div>
-
-            <p className="page-content">{page.content}</p>
           </li>
         ))}
       </ul>
