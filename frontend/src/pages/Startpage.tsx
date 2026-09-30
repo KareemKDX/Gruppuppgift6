@@ -14,7 +14,7 @@ function Startpage() {
         const res = await api.get<Song[]>("/api/songs");
 
         const data = res.data;
-        console.log(data);
+
         setSongs(data.slice(0, 6));
       } catch (error) {
         console.log(error);
@@ -31,7 +31,7 @@ function Startpage() {
   }
 
   return (
-    <div className="showcase-container main-bg-light">
+    <div className="showcase-container">
       <div className="startpage-intro">
         <p className="showcase-header">
           Explore & listen to songs created around the world...

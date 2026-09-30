@@ -60,8 +60,9 @@ a {
   scrollbar-width: thin;
   scrollbar-color: #4a4a4a transparent;
 }
-.main-bg-light {
+.main-bg-faded {
   background: linear-gradient(180deg, #2a2a2a 0%, var(--bg-main) 300px);
+  height: 100vh;
 }
 
 .navbar {
@@ -163,7 +164,7 @@ a {
 @media (max-width: 968px) {
   .app {
     grid-template-columns: 1fr;
-    grid-template-rows: var(--navbar-height) 95px 1fr;
+    grid-template-rows: var(--navbar-height) 70px 1fr;
     grid-template-areas:
       "navbar"
       "sidebar"

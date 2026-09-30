@@ -67,55 +67,57 @@ function AuthPage({ onLoggedIn }: Props) {
 
   return (
     <div className="auth-page">
-      <form className="auth-form" onSubmit={handleSubmit}>
-        <h1>MusicPlate</h1>
+      <div className="auth-container">
+        <form className="auth-form" onSubmit={handleSubmit}>
+          <h1>MusicPlate</h1>
 
-        <h2>{mode === "login" ? "Logga in" : "Skapa konto"}</h2>
+          <h2>{mode === "login" ? "Logga in" : "Skapa konto"}</h2>
 
-        {mode === "register" && (
+          {mode === "register" && (
+            <input
+              placeholder="Användarnamn"
+              required
+              value={username}
+              onChange={(event) => setUsername(event.target.value)}
+            />
+          )}
+
           <input
-            placeholder="Användarnamn"
+            type="email"
+            placeholder="Email"
             required
-            value={username}
-            onChange={(event) => setUsername(event.target.value)}
+            value={email}
+            onChange={(event) => setEmail(event.target.value)}
           />
-        )}
 
-        <input
-          type="email"
-          placeholder="Email"
-          required
-          value={email}
-          onChange={(event) => setEmail(event.target.value)}
-        />
+          <input
+            type="password"
+            placeholder="Lösenord"
+            required
+            value={password}
+            onChange={(event) => setPassword(event.target.value)}
+          />
 
-        <input
-          type="password"
-          placeholder="Lösenord"
-          required
-          value={password}
-          onChange={(event) => setPassword(event.target.value)}
-        />
+          <button type="submit">
+            {mode === "login" ? "Logga in" : "Skapa konto"}
+          </button>
 
-        <button type="submit">
-          {mode === "login" ? "Logga in" : "Skapa konto"}
-        </button>
+          {error && <p className="auth-error">{error}</p>}
 
-        {error && <p className="auth-error">{error}</p>}
-
-        <button
-          type="button"
-          className="auth-switch"
-          onClick={() => {
-            setMode(mode === "login" ? "register" : "login");
-            setError("");
-          }}
-        >
-          {mode === "login"
-            ? "Har du inget konto? Registrera dig"
-            : "Har du redan ett konto? Logga in"}
-        </button>
-      </form>
+          <button
+            type="button"
+            className="auth-switch"
+            onClick={() => {
+              setMode(mode === "login" ? "register" : "login");
+              setError("");
+            }}
+          >
+            {mode === "login"
+              ? "Har du inget konto? Registrera dig"
+              : "Har du redan ett konto? Logga in"}
+          </button>
+        </form>
+      </div>
     </div>
   );
 }

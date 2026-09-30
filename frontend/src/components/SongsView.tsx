@@ -91,7 +91,9 @@ function SongsView({
           </div>
 
           <div className="song-list">
-            {filteredSongs.length === 0 && <p>No songs to show.</p>}
+            {filteredSongs.length === 0 && (
+              <p>No tracks added to playlist yet.</p>
+            )}
 
             {filteredSongs.map((song, index) => {
               const isLocked =

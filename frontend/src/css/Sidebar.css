@@ -56,8 +56,7 @@
   color: black;
   border-radius: var(--radius);
   aspect-ratio: 1 / 1;
-  max-width: 90px;
-  min-width: 70px;
+  overflow: hidden;
   padding: 6px;
 }
 .sidebar-playlist-card:hover {
@@ -149,7 +148,8 @@ button.sidebar-add-playlist {
   font-size: 14px;
   font-weight: 600;
   text-align: center;
-  overflow-wrap: anywhere;
+  white-space: nowrap;
+  overflow: hidden;
   line-height: 1.2;
 }
 .playlist-song-amount {
@@ -208,5 +208,10 @@ button.sidebar-add-playlist {
 
   .sidebar-create-form {
     margin-left: 10px;
+  }
+
+  .sidebar-playlist-card {
+    height: 50px;
+    min-width: 50px;
   }
 }

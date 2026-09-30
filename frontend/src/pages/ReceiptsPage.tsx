@@ -48,31 +48,33 @@ function ReceiptsPage() {
   }
 
   return (
-    <div className="receipts-page">
-      <div className="page-header">
-        <h1>Your receipts</h1>
-        <p>See all your receipts here</p>
-      </div>
+    <div className="main-bg-faded">
+      <div className="receipts-page">
+        <div className="page-header">
+          <h1>Your receipts</h1>
+          <p>See all your receipts here</p>
+        </div>
 
-      {receipts.length === 0 ? (
-        <p className="receipts-message">You have no receipts yet</p>
-      ) : (
-        <ul className="receipts-list">
-          {receipts.map((receipt) => (
-            <li className="receipt-item" key={receipt.id}>
-              <div>
-                <span className="receipt-plan">
-                  {receipt.subscription_name}
-                </span>
-                <span className="receipt-date">
-                  {formatDate(receipt.payment_date)}
-                </span>
-              </div>
-              <span className="receipt-amount">{receipt.amount} kr</span>
-            </li>
-          ))}
-        </ul>
-      )}
+        {receipts.length === 0 ? (
+          <p className="receipts-message">You have no receipts yet</p>
+        ) : (
+          <ul className="receipts-list">
+            {receipts.map((receipt) => (
+              <li className="receipt-item" key={receipt.id}>
+                <div>
+                  <span className="receipt-plan">
+                    {receipt.subscription_name}
+                  </span>
+                  <span className="receipt-date">
+                    {formatDate(receipt.payment_date)}
+                  </span>
+                </div>
+                <span className="receipt-amount">{receipt.amount} kr</span>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
     </div>
   );
 }
