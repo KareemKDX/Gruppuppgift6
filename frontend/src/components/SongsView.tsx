@@ -105,7 +105,7 @@ function SongsView({
                 <div
                   className={
                     isLocked
-                      ? "song-card-locked"
+                      ? "song-card-early-access"
                       : hasEarlyAccess
                         ? "song-card-early-access"
                         : "song-card"
@@ -139,7 +139,7 @@ function SongsView({
                     )}
                     {isLocked ? (
                       <Link to="/subscription" className="upgrade-btn">
-                        Upgrade
+                        Upgrade to listen
                       </Link>
                     ) : (
                       <p className="song-row-duration-text">
