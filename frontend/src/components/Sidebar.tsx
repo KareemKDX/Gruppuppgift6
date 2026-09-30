@@ -10,8 +10,15 @@ type Playlist = {
   song_count: number;
 };
 
+type ContentPage = {
+  id: number;
+  title: string;
+  required_subscription_name: string;
+};
+
 function Sidebar({ loggedIn }: { loggedIn: boolean }) {
   const [playlists, setPlaylists] = useState<Playlist[]>([]);
+  const [pages, setPages] = useState<ContentPage[]>([]);
   const [creating, setCreating] = useState(false);
   const [name, setName] = useState("");
   const [error, setError] = useState("");
@@ -31,6 +38,7 @@ function Sidebar({ loggedIn }: { loggedIn: boolean }) {
     };
 
     loadPlaylists();
+    api.get("/api/content-pages").then((res) => setPages(res.data)).catch((err) => console.log(err));
     window.addEventListener(PLAYLISTS_CHANGED, loadPlaylists);
     return () => window.removeEventListener(PLAYLISTS_CHANGED, loadPlaylists);
   }, [loggedIn]);
@@ -112,6 +120,29 @@ function Sidebar({ loggedIn }: { loggedIn: boolean }) {
                     <div className="playlist-info">
                       <div className="playlist-song-amount">
                         {playlist.song_count} tracks
+                      </div>
+                    </div>
+                  </NavLink>
+                ))}
+              </div>
+
+              <div className="sidebar-header">
+                <div className="sidebar-header-text">Pages</div>
+              </div>
+
+              <div className="sidebar-item-container">
+                {pages.map((page) => (
+                  <NavLink
+                    to={`/pages/${page.id}`}
+                    className="sidebar-playlist-card"
+                    key={page.id}
+                  >
+                    <div className="playlist-header">
+                      <h4>{page.title}</h4>
+                    </div>
+                    <div className="playlist-info">
+                      <div className="playlist-song-amount">
+                        {page.required_subscription_name}
                       </div>
                     </div>
                   </NavLink>
