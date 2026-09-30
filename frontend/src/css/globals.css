@@ -62,7 +62,7 @@ a {
 }
 .main-bg-faded {
   background: linear-gradient(180deg, #2a2a2a 0%, var(--bg-main) 300px);
-  height: 100vh;
+  height: 100%;
 }
 
 .navbar {
@@ -172,6 +172,9 @@ a {
   }
   .sidebar {
     justify-content: center;
+
+    margin-right: 0px;
+    margin-left: 0px;
   }
   .main {
     margin-top: 10px;

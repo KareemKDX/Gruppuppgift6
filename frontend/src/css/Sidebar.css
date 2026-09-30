@@ -1,7 +1,7 @@
 .sidebar-wrapper {
   background-color: var(--bg-card-hover);
   border-radius: var(--radius);
-  height: 100vh;
+  height: 100%;
   border-radius: var(--radius);
   padding: 6px;
 }
