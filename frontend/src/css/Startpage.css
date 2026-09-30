@@ -105,6 +105,8 @@
 @media (max-width: 968px) {
   .startpage-intro {
     margin-top: 20px;
-    align-items: center;
+  }
+  .showcase-header {
+    width: 300px;
   }
 }

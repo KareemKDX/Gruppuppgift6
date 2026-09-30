@@ -1,6 +1,6 @@
 import { useState } from "react";
 import type { User } from "../auth";
-import { Link } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import "../css/Navbar.css";
 
 type Props = {
@@ -37,25 +37,25 @@ function Navbar({ user, onLogout }: Props) {
         {user ? (
           <>
             <span>{user.username}</span>
-            <Link
+            <NavLink
               to="/profile"
               className="btn btn-secondary-nav"
               onClick={handleLinkClick}
             >
               My Profile
-            </Link>
+            </NavLink>
 
             {user.role === "admin" && (
-              <Link
+              <NavLink
                 to="/admin"
                 className="btn btn-secondary-nav"
                 onClick={handleLinkClick}
               >
                 Admin
-              </Link>
+              </NavLink>
             )}
 
-            <Link
+            <NavLink
               to="/"
               className="btn btn-primary-nav"
               onClick={() => {
@@ -64,16 +64,16 @@ function Navbar({ user, onLogout }: Props) {
               }}
             >
               Logout
-            </Link>
+            </NavLink>
           </>
         ) : (
-          <Link
+          <NavLink
             to="/login"
             className="btn btn-secondary-nav"
             onClick={handleLinkClick}
           >
             Login
-          </Link>
+          </NavLink>
         )}
       </div>
     </header>
