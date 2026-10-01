@@ -1,0 +1,90 @@
+.auth-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: linear-gradient(180deg, #2a2a2a 0%, var(--bg-app) 400px);
+}
+
+.auth-container {
+  width: 500px;
+  padding: 4rem 1rem;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background-color: var(--bg-card);
+  border-radius: var(--radius);
+  padding: 32px;
+}
+
+.auth-form h1 {
+  font-size: 28px;
+  text-align: center;
+}
+
+.auth-form h2 {
+  font-size: 18px;
+  font-weight: 400;
+  color: var(--text-secondary);
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+.auth-form input {
+  background-color: var(--bg-app);
+  color: var(--text-primary);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius);
+  padding: 10px 12px;
+  font-size: 14px;
+  font-family: inherit;
+}
+
+.auth-form input::placeholder {
+  color: var(--text-secondary);
+}
+
+.auth-form input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.auth-form button[type="submit"] {
+  background-color: var(--accent);
+  color: var(--bg-app);
+  border: none;
+  border-radius: 999px;
+  padding: 12px 24px;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  margin-top: 8px;
+}
+
+.auth-form button[type="submit"]:hover {
+  opacity: 0.85;
+}
+
+.auth-switch {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-family: inherit;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.auth-switch:hover {
+  color: var(--text-primary);
+}
+
+.auth-error {
+  color: #ff6b6b;
+  font-size: 14px;
+  text-align: center;
+}

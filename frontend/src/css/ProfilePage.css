@@ -1,0 +1,96 @@
+.profile-page {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.profile-left-content {
+  background-color: var(--bg-card);
+  border-radius: var(--radius);
+  padding: 12px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  gap: 1rem;
+  flex: 2;
+}
+
+.profile-card {
+  background-color: var(--bg-card);
+  border-radius: var(--radius);
+  padding: 12px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  gap: 1rem;
+  flex: 1;
+}
+
+.profile-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.profile-outer-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 50px;
+}
+.profile-right-content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+}
+
+.profile-items {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+.profile-label {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #9aa0ab;
+}
+
+.subscription-box-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.subscription-items {
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.subscription-items h4 {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #9aa0ab;
+  margin: 0 0 4px;
+}
+
+.subscription-items p {
+  font-size: 14px;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.subscription-items p::before {
+  content: "✓";
+  color: var(--color-border);
+  font-weight: 700;
+}

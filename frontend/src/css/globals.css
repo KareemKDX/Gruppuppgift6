@@ -12,6 +12,7 @@ body {
   --bg-sidebar: #121212;
   --bg-main: #121212;
   --bg-card: #181818;
+  --bg-card-dark: #161616;
   --bg-card-hover: #282828;
   --text-primary: #ffffff;
   --text-secondary: #b3b3b3;
@@ -19,6 +20,10 @@ body {
   --navbar-height: 64px;
   --sidebar-width: 160px;
   --radius: 6px;
+  --color-border: #b87333;
+  --color-border-faded: rgba(184, 115, 51, 0.25);
+  --color-bg-gold: #d9a06c;
+  --color-border-faded-green: rgba(29, 185, 84, 0.35);
 }
 
 p,
@@ -29,8 +34,12 @@ h4,
 h5 {
   margin: 0;
 }
+a {
+  text-decoration: none;
+  color: inherit;
+}
 
-/*PAGE LAYOUT (NAVBAR, SIDEBAR, MAIN*/
+/*PAGE LAYOUT FOR PC (BIG (NAVBAR, SIDEBAR, MAIN*/
 .app {
   display: grid;
   grid-template-columns: var(--sidebar-width) 1fr;
@@ -42,12 +51,20 @@ h5 {
   max-width: 1680px;
   margin: 0 auto;
 }
+
 .main {
   grid-area: main;
-  background: linear-gradient(180deg, #2a2a2a 0%, var(--bg-main) 300px);
+
   overflow-y: auto;
-  padding: 8px;
+  border-radius: var(--radius);
+  scrollbar-width: thin;
+  scrollbar-color: #4a4a4a transparent;
 }
+.main-bg-faded {
+  background: linear-gradient(180deg, #2a2a2a 0%, var(--bg-main) 300px);
+  height: 100%;
+}
+
 .navbar {
   display: flex;
   grid-area: navbar;
@@ -61,7 +78,105 @@ h5 {
   display: flex;
   flex-direction: column;
   grid-area: sidebar;
-  background-color: var(--bg-sidebar);
   overflow-y: auto;
-  padding: 6px;
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+.navbar-user {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--text-secondary);
+}
+
+.navbar-logout {
+  background: none;
+  color: var(--text-primary);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 999px;
+  padding: 6px 16px;
+  font-size: 13px;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.navbar-logout:hover {
+  border-color: var(--text-primary);
+}
+
+/* BUTTONS */
+.btn {
+  display: inline-block;
+  border-radius: var(--radius);
+  text-decoration: none;
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+
+.btn-primary {
+  background-color: var(--text-primary);
+  color: #000000;
+  padding: 12px 32px;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: var(--text-primary);
+  border: 2px solid;
+  border-color: var(--color-border);
+  padding: 12px 32px;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.btn:hover {
+  transform: scale(1.04);
+}
+
+.page-header {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 30px;
+}
+
+.page-header h1 {
+  margin: 0;
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.page-header p {
+  margin: 0;
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+.no-pointer {
+  pointer-events: none;
+}
+
+/*PAGE LAYOUT FOR SMALLER SCREENS*/
+@media (max-width: 968px) {
+  .app {
+    grid-template-columns: 1fr;
+    grid-template-rows: var(--navbar-height) 70px 1fr;
+    grid-template-areas:
+      "navbar"
+      "sidebar"
+      "main";
+  }
+  .sidebar {
+    justify-content: center;
+
+    margin-right: 0px;
+    margin-left: 0px;
+  }
+  .main {
+    margin-top: 10px;
+  }
 }

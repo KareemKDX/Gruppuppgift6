@@ -1,28 +1,39 @@
 .sidebar-wrapper {
   background-color: var(--bg-card-hover);
   border-radius: var(--radius);
-  height: 100vh;
+  height: 100%;
   border-radius: var(--radius);
+  padding: 6px;
 }
 
 .sidebar-header {
   display: flex;
+  align-items: center;
   justify-content: space-between;
   flex-direction: row;
   padding: 10px;
   background-color: black;
+  border-radius: var(--radius);
+  font-size: 16px;
+  font-weight: 500;
+  color: #e8eaed;
+  white-space: nowrap;
+  margin-bottom: 10px;
+  text-overflow: ellipsis;
 }
 
 .sidebar-add-playlist {
-  display: flex;
   width: 28px;
   height: 28px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 2px solid white;
+  border: 3px solid var(--bg-card-hover);
   border-radius: var(--radius);
   cursor: pointer;
+}
+.sidebar-add-playlist:hover {
+  transform: scale(1.15);
 }
 
 .sidebar-add-playlist h4 {
@@ -45,12 +56,19 @@
   width: 100%;
   align-items: center;
   justify-content: center;
-  background-color: var(--text-secondary);
+  background-color: var(--bg-card);
+  color: var(--text-primary);
+  border-radius: var(--radius);
   color: black;
   border-radius: var(--radius);
   aspect-ratio: 1 / 1;
-  max-width: 90px;
+  overflow: hidden;
+  padding: 6px;
 }
+.sidebar-playlist-card:hover {
+  background-color: var(--bg-card-hover);
+}
+
 .playlist-info {
   color: var(--text-primary);
 }
@@ -58,4 +76,155 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.track-card {
+  background-color: var(--bg-card);
+  border-radius: var(--radius);
+  padding: 12px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.track-card:hover {
+  background-color: var(--bg-card-hover);
+}
+
+.track-cover {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background-color: #333;
+  border-radius: 4px;
+  margin-bottom: 12px;
+}
+
+.track-title {
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.track-artist {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-top: 4px;
+}
+
+button.sidebar-add-playlist {
+  background: none;
+  color: inherit;
+  padding: 0;
+}
+
+.sidebar-create-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sidebar-create-form input {
+  box-sizing: border-box;
+  padding: 6px;
+  border: none;
+  border-radius: var(--radius);
+  background-color: var(--bg-card);
+  color: var(--text-primary);
+}
+
+.sidebar-error {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  padding: 8px 10px 0;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.playlist-header h4 {
+  color: var(--text-primary);
+  padding: 0;
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  line-height: 1.2;
+}
+.playlist-song-amount {
+  font-size: 14px;
+}
+.active {
+  border: 2px solid gainsboro;
+}
+
+.create-playlist-btn {
+  padding: 5px;
+  background-color: var(--text-primary);
+}
+
+/*SMALLER SCREENS. MAKE SIDEBAR CONTENT FILL IN ROW*/
+/*ADJUSTS SCROLL ETC FOR SMALLER SCREENS*/
+@media (max-width: 960px) {
+  .sidebar-wrapper {
+    height: 100%;
+    display: flex;
+    align-items: center;
+  }
+
+  .sidebar-item-container {
+    flex-direction: row;
+    align-items: center;
+    padding: 8px 12px;
+    gap: 1rem;
+    overflow-x: auto;
+  }
+  .sidebar {
+    overflow-y: hidden;
+    overflow-x: hidden;
+  }
+
+  .sidebar-wrapper {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  .sidebar-item-container {
+    flex-direction: row;
+    align-items: center;
+
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch; /* SMOOTHER SCROLL FOR IOS (IPHONE ETC) */
+    scrollbar-width: none; /* REMOVE SCROLL FROM FIREFOX */
+  }
+
+  .sidebar-item-container::-webkit-scrollbar {
+    display: none; /* HIDE SCROLLWHEEL FROM WEBBROWSERS ON SMALLER SCREENS */
+  }
+
+  .sidebar-create-form {
+    margin-left: 10px;
+    gap: 5px;
+  }
+
+  .sidebar-playlist-card {
+    height: 50px;
+    min-width: 50px;
+  }
+  .sidebar-header-text {
+    display: none;
+  }
+  .sidebar-header {
+    background-color: var(--bg-card-hover);
+    margin-bottom: 0px;
+  }
+  .sidebar-create-form input {
+    width: 250px;
+  }
 }
