@@ -17,6 +17,7 @@ import CheckoutPage from "./pages/CheckoutPage.tsx";
 import ReceiptsPage from "./pages/ReceiptsPage.tsx";
 import PlaylistPage from "./pages/PlaylistPage.tsx";
 import PlaylistEditPage from "./pages/PlaylistEditPage.tsx";
+import ContentPage from "./pages/ContentPage.tsx";
 
 function App() {
   const [user, setUser] = useState<User | null>(null);
@@ -83,6 +84,7 @@ function App() {
                 path="/playlists/:id/edit"
                 element={<PlaylistEditPage />}
               />
+              <Route path="/pages/:id" element={<ContentPage />} />
               {/* adminsidan finns bara för den som är admin */}
               {user.role === "admin" && (
                 <Route path="/Admin" element={<AdminPage />} />

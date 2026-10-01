@@ -13,7 +13,10 @@ const NewContentPageSchema = z.object({
 export const getContentPages = async (req: Request, res: Response) => {
   try {
     const result = await pool.query(
-      "SELECT * FROM content_pages ORDER BY created_at DESC, id DESC"
+      `SELECT content_pages.id, content_pages.title, content_pages.required_subscription_id, 
+       subscriptions.name AS required_subscription_name
+       FROM content_pages JOIN subscriptions ON subscriptions.id = content_pages.required_subscription_id
+       ORDER BY content_pages.created_at DESC, content_pages.id DESC`
     );
     res.json(result.rows);
   } catch (error) {
@@ -43,5 +46,42 @@ export const addContentPage = async (req: Request, res: Response) => {
   } catch (error) {
     console.log(error);
     res.status(500).json({ error: "Kunde inte lägga till innehållssida" });
+  }
+};
+
+const PageIdSchema = z.coerce.number().int().positive().max(2147483647);
+
+export const getContentPage = async (req: Request, res: Response) => {
+  const id = PageIdSchema.safeParse(req.params.id);
+
+  if (!id.success) {
+    return res.status(404).json({ error: "Innehållssidan finns inte" });
+  }
+
+  try {
+    const result = await pool.query(
+      `SELECT content_pages.id, content_pages.title, content_pages.content, required.name AS required_subscription_name,
+       (users.role = 'admin' OR own.price >= required.price) AS allowed FROM content_pages
+       JOIN subscriptions required ON required.id = content_pages.required_subscription_id JOIN users ON users.id = $2
+       LEFT JOIN subscriptions own ON own.id = users.subscription_id WHERE content_pages.id = $1`,
+      [id.data, req.user!.id]
+    );
+    const page = result.rows[0];
+
+    if (!page) {
+      return res.status(404).json({ error: "Innehållssidan finns inte" });
+    }
+
+    if (!page.allowed) {
+      return res.status(403).json({
+        error: `Du behöver ${page.required_subscription_name} för att läsa den här sidan`,
+        title: page.title,
+      });
+    }
+
+    res.json({ id: page.id, title: page.title, content: page.content });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: "Kunde inte hämta innehållssidan" });
   }
 };
