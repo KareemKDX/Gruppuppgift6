@@ -2,15 +2,19 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+
   background: linear-gradient(180deg, #2a2a2a 0%, var(--bg-app) 400px);
+}
+
+.auth-container {
+  width: 500px;
+  padding: 4rem 1rem;
 }
 
 .auth-form {
   display: flex;
   flex-direction: column;
   gap: 12px;
-  width: 360px;
   background-color: var(--bg-card);
   border-radius: var(--radius);
   padding: 32px;

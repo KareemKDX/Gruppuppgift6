@@ -1,18 +1,25 @@
 .sidebar-wrapper {
   background-color: var(--bg-card-hover);
   border-radius: var(--radius);
-  height: 100vh;
+  height: 100%;
   border-radius: var(--radius);
   padding: 6px;
 }
 
 .sidebar-header {
   display: flex;
+  align-items: center;
   justify-content: space-between;
   flex-direction: row;
   padding: 10px;
   background-color: black;
   border-radius: var(--radius);
+  font-size: 16px;
+  font-weight: 500;
+  color: #e8eaed;
+  white-space: nowrap;
+  margin-bottom: 10px;
+  text-overflow: ellipsis;
 }
 
 .sidebar-add-playlist {
@@ -24,7 +31,6 @@
   border: 3px solid var(--bg-card-hover);
   border-radius: var(--radius);
   cursor: pointer;
-  margin-left: 10px;
 }
 .sidebar-add-playlist:hover {
   transform: scale(1.15);
@@ -56,8 +62,7 @@
   color: black;
   border-radius: var(--radius);
   aspect-ratio: 1 / 1;
-  max-width: 90px;
-  min-width: 70px;
+  overflow: hidden;
   padding: 6px;
 }
 .sidebar-playlist-card:hover {
@@ -70,7 +75,6 @@
 .playlist-header {
   display: flex;
   justify-content: center;
-
   align-items: center;
 }
 
@@ -118,12 +122,9 @@ button.sidebar-add-playlist {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  margin-top: 10px;
-  width: 100%;
 }
 
 .sidebar-create-form input {
-  width: 100%;
   box-sizing: border-box;
   padding: 6px;
   border: none;
@@ -149,7 +150,8 @@ button.sidebar-add-playlist {
   font-size: 14px;
   font-weight: 600;
   text-align: center;
-  overflow-wrap: anywhere;
+  white-space: nowrap;
+  overflow: hidden;
   line-height: 1.2;
 }
 .playlist-song-amount {
@@ -208,5 +210,21 @@ button.sidebar-add-playlist {
 
   .sidebar-create-form {
     margin-left: 10px;
+    gap: 5px;
+  }
+
+  .sidebar-playlist-card {
+    height: 50px;
+    min-width: 50px;
+  }
+  .sidebar-header-text {
+    display: none;
+  }
+  .sidebar-header {
+    background-color: var(--bg-card-hover);
+    margin-bottom: 0px;
+  }
+  .sidebar-create-form input {
+    width: 250px;
   }
 }

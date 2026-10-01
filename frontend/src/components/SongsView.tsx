@@ -91,7 +91,9 @@ function SongsView({
           </div>
 
           <div className="song-list">
-            {filteredSongs.length === 0 && <p>No songs to show.</p>}
+            {filteredSongs.length === 0 && (
+              <p>No tracks added to playlist yet.</p>
+            )}
 
             {filteredSongs.map((song, index) => {
               const isLocked =
@@ -103,7 +105,7 @@ function SongsView({
                 <div
                   className={
                     isLocked
-                      ? "song-card-locked"
+                      ? "song-card-early-access"
                       : hasEarlyAccess
                         ? "song-card-early-access"
                         : "song-card"
@@ -137,7 +139,7 @@ function SongsView({
                     )}
                     {isLocked ? (
                       <Link to="/subscription" className="upgrade-btn">
-                        Upgrade
+                        Upgrade to listen
                       </Link>
                     ) : (
                       <p className="song-row-duration-text">

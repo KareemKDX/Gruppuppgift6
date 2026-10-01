@@ -6,7 +6,6 @@ const router = Router();
 
 //FETCH ALL PROFILE INFO
 router.get("/profile", authenticateToken, async (req, res) => {
-  console.log("profile router loaded");
   try {
     const result = await pool.query(
       `SELECT users.id, users.username, users.email, users.role, users.created_at,

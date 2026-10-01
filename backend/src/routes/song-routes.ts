@@ -85,10 +85,19 @@ export const addSong = async (req: Request, res: Response) => {
 
   try {
     const result = await pool.query(
-      "INSERT INTO songs (artist, title, album, duration, release_type) VALUES ($1, $2, $3, $4, $5) RETURNING *",
+      "INSERT INTO songs (artist, title, album, duration, release_type) VALUES ($1, $2, $3, $4, $5) RETURNING id",
       [song.artist, song.title, song.album, song.duration, song.release_type],
     );
-    res.status(201).json(result.rows[0]);
+
+    //Insert random image url to new song directly from database
+    const newId = result.rows[0].id;
+    const imageUrl = `https://picsum.photos/300/300?random=${newId}`;
+
+    const updateResult = await pool.query(
+      "UPDATE songs SET image_url = $1 WHERE id = $2 RETURNING *",
+      [imageUrl, newId],
+    );
+    res.status(201).json(updateResult.rows[0]);
   } catch (error) {
     console.log(error);
     res.status(500).json({ error: "Kunde inte lägga till låt" });

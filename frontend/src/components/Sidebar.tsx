@@ -73,7 +73,7 @@ function Sidebar({ loggedIn }: { loggedIn: boolean }) {
                 aria-label="Create playlist"
                 onClick={() => setCreating(!creating)}
               >
-                <h4>+</h4>
+                <h4>{creating ? "−" : "+"}</h4>
               </button>
             )}
           </div>
